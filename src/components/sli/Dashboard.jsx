@@ -38,7 +38,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <main className="relative h-screen overflow-hidden bg-gray-100 dark:bg-gray-800">
+      <main className="relative h-screen overflow-hidden bg-gray-100 ">
         <div className="flex items-start justify-between">
           <div className="relative hidden h-screen  lg:block w-80">
             <Sidebar />
@@ -74,7 +74,7 @@ const Dashboard = () => {
                   </a>
                   <button
                     ref={profileRef}
-                    className="flex items-center text-gray-500 dark:text-white text-md"
+                    className="flex items-center text-gray-500  text-md"
                     onClick={() => setIsProfileActive(!isProfileActive)}
                   >
                     Samm
@@ -182,7 +182,7 @@ const Dashboard = () => {
                           <div className="flex items-center text-sm">
                             <div>
                               <p className="font-semibold">{user.name}</p>
-                              <p className="text-xs text-gray-600 dark:text-gray-400">
+                              <p className="text-xs text-gray-600">
                                 {user.job}
                               </p>
                             </div>
