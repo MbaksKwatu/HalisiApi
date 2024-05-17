@@ -87,7 +87,7 @@ const Resources = () => {
               </h1>
 
               <p className="text-gray-700 mt-4 lg:text-sm lg:max-w-2xl">
-                "Class is dead", says Foucault; however, according to Reicher, it is
+                Class is dead, says Foucault; however, according to Reicher, it is
                 not so much class that is dead, but rather the absurdity, and some
                 would say the paradigm, of class. However, the subject is interpolated
                 into a postpatriarchialist dialectic theory that includes
