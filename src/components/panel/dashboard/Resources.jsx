@@ -6,7 +6,7 @@ const Resources = () => {
     const profileRef = useRef();
     const [isProfileActive, setIsProfileActive] = useState(false);
   return (
-    <main className="relative h-screen overflow-hidden bg-gray-100 dark:bg-gray-800">
+    <main className="relative h-screen overflow-hidden bg-gray-100 ">
         <div className="flex items-start justify-between">
           <div className="relative hidden h-screen  lg:block w-80">
             <Sidebar />
@@ -42,7 +42,7 @@ const Resources = () => {
                   </a>
                   <button
                     ref={profileRef}
-                    className="flex items-center text-gray-500 dark:text-white text-md"
+                    className="flex items-center text-gray-500  text-md"
                     onClick={() => setIsProfileActive(!isProfileActive)}
                   >
                     Samm

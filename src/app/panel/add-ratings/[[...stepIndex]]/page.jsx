@@ -25,8 +25,16 @@ const Page = ({params,searchParams}) => {
   const dispatch = useDispatch();
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [ratings, setRatings] = useState({});
 
   const cps = useSelector(state => state.customerslice?.cps)
+
+  const handleRatingChange = (questionId, score, comment) => {
+    setRatings((prevRatings) => ({
+      ...prevRatings,
+      [questionId]: { score, comment }
+    }));
+  };
 
   
   useEffect(() => {
@@ -70,7 +78,7 @@ const Page = ({params,searchParams}) => {
       break;
   }
 
-  return <ContentComponent questions={questionSet} />;
+  return <ContentComponent questions={questionSet} onRatingChange={handleRatingChange} />;
 };
 
 export default Page;

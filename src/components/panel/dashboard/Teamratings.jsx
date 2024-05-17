@@ -19,8 +19,12 @@ import { BsEnvelopePaper } from "react-icons/bs";
 import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
 
+import { useDispatch, useSelector } from 'react-redux';
+
 const TeamRatings = () => {
   const profileRef = useRef();
+  const dispatch = useDispatch()
+  const {user} = useSelector(state => state.customerslice);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isProfileActive, setIsProfileActive] = useState(false);
@@ -38,7 +42,7 @@ const TeamRatings = () => {
 
   return (
     <>
-      <main className="relative h-screen overflow-hidden bg-gray-100 dark:bg-gray-800">
+      <main className="relative h-screen overflow-hidden bg-gray-100 ">
         <div className="flex items-start justify-between">
           <div className="relative hidden h-screen  lg:block w-80">
             <Sidebar />
@@ -74,10 +78,10 @@ const TeamRatings = () => {
                   </a>
                   <button
                     ref={profileRef}
-                    className="flex items-center text-gray-500 dark:text-white text-md"
+                    className="flex items-center text-gray-500  text-md"
                     onClick={() => setIsProfileActive(!isProfileActive)}
                   >
-                    Samm
+                    <p>{user?.name}</p>
                     <svg
                       width="20"
                       height="20"
@@ -121,12 +125,10 @@ const TeamRatings = () => {
               <div className="flex flex-col items-center w-full my-6 space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
                 <div className="flex items-center w-full space-x-4">
                   <div className="w-1/2 ">
-                    <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
+                    <div className="relative w-full px-4 py-6 bg-cyan-50 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-gray-500 ">Maximum SLI Score </p>
                       <p className="text-xl font-bold text-cyan-300 ">40</p>
-                      {/* <p className="text-sm text-gray-400">
-                        View all Upcoming Interviews
-                      </p> */}
+                     
                       <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
                         <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
                       </span>
@@ -136,21 +138,17 @@ const TeamRatings = () => {
                     <div className="relative w-full px-4 py-6 bg-purple-100 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-gray-500 ">Performance Score</p>
                       <p className="text-xl font-bold text-black ">70</p>
-                      {/* <p className="text-sm text-gray-400">
-                        View all Rating Process
-                      </p> */}
+                      
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
                         <MdLockOutline className="text-purple-500 h5 w-5" />
                       </span>
                     </div>
                   </div>
                   <div className="w-1/2">
-                    <div className="relative w-full px-4 py-6 bg-orange-200 rounded-md shadow-lg ">
+                    <div className="relative w-full px-4 py-6 bg-blue-100 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-gray-500 ">Rating</p>
                       <p className="text-xl font-bold text-black ">Pass</p>
-                      {/* <p className="text-sm text-gray-400">
-                        View all SLI profiles
-                      </p> */}
+                     
                       <span className="absolute hidden lg:flex  p-4 border border-teal-500 rounded-md top-2 right-4">
                         <TbPhotoCheck className="text-teal-500 h5 w-5" />
                       </span>
