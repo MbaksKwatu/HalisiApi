@@ -5,7 +5,7 @@ import "./globals.css";
 import { Provider } from "react-redux";
 import store from '@/redux/store'
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body >
       
       <Provider store={store}>
         {children}
