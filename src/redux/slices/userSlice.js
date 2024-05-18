@@ -10,7 +10,8 @@ const initialState = {
     // user: JSON.parse(localStorage.getItem("user")) || {},
     
     slis:{},
-    cps:{}
+    cps:{},
+    stats:{}
 
 }
 
@@ -97,6 +98,22 @@ const userSlice = createSlice({
               state.error = ""
       })
       builder.addCase(actions.getCPS.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getProfileStats.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getProfileStats.fulfilled, (state, action)=>{
+              state.loading = false
+              state.stats = action.payload
+              state.message = "CPS fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getProfileStats.rejected, (state, action)=>{
               state.loading=false;
               state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
               state.message = action.error.message
