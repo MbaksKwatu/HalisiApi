@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createUserPanel } from '@/redux/slices/sliceActions'
 import { useRouter } from 'next/navigation'
 import SnackBar from '@/components/shared/SnackBar'
+import { ClipLoader, BarLoader } from 'react-spinners';
 
 const Signup = () => {
     const dispatch = useDispatch();
@@ -12,13 +13,16 @@ const Signup = () => {
     const email = useRef(null);
     const phoneNumber = useRef(null);
     const password = useRef(null);
+    const [loading, setLoading] = useState(false)
     const [show, setshow] = useState({
       open:false,
       text: '',
       mood: 'error'
     })
 
-    const handleSignUp = () => {
+    const handleSignUp = (e) => {
+      e.preventDefault()
+      setLoading(true)
         const details = {
             "name":name.current.value,
             "email":email.current.value,
@@ -28,13 +32,13 @@ const Signup = () => {
         dispatch(createUserPanel(details))
         .then((response)=>{
             if (response?.payload?.status === "Success"){
-              
               setshow({open:true, text: 'Account created successfully', mood: 'success'})
               router.push('/panel/login') 
             }else{
               setshow({open:true, text: 'Failed, try again', mood: 'error'})
             }
         })
+        .finally(setLoading(false))
 
     }
 
@@ -161,7 +165,7 @@ const Signup = () => {
 
         <div className="mt-6">
           <button onClick={handleSignUp} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
-            Sign up
+          {loading ?  ( <>Please wait <BarLoader color='white'  /></>) : "Sign up"}
           </button>
         </div>
 

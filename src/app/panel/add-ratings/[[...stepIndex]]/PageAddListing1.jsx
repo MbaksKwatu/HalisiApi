@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-const PageAddListing1 = ({questions,onRatingChange }) => {
+const PageAddListing1 = ({questions, onRatingChange }) => {
   const [localRatings, setLocalRatings] = useState(
     questions.reduce((acc, question) => {
       acc[question.ID] = { score: 0, comment: '' };
@@ -31,7 +31,7 @@ const PageAddListing1 = ({questions,onRatingChange }) => {
     <div className="flex py-4 w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl">
       <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
         <div className="flex justify-center mx-auto">
-          <h2 className="font-semibold">Parachici SLI Rating</h2>
+          {/* <h2 className="font-semibold">Parachici SLI Rating</h2> */}
           {/* <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt=""/> */}
         </div>
 
@@ -39,22 +39,20 @@ const PageAddListing1 = ({questions,onRatingChange }) => {
           Rate the SLI profile
         </p>
 
-        <p className="mt-3 text-sm  text-center text-gray-600 ">
-          1 start for What is your field of work
-        </p>
+        
         
         
         {questions?.map((question)=> (
           <div key={question.id} className="mt-4">
           <div className="flex justify-between">
             <label
-              className="block mb-2 text-sm font-medium text-gray-600 "
+              className="block mb-2 text-sm font-medium text-gray-800 "
               htmlFor="loggingPassword"
             >
              {question.description}
             </label>
             <div className="flex justify-center items-center gap-x-4 text-yellow-600 text-sm">
-              {[...Array(5)].map((_, index) => (
+              {[...Array(4)].map((_, index) => (
                   <svg
                     key={index}
                     className="w-5 h-5 cursor-pointer"

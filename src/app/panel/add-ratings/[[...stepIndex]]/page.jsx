@@ -26,6 +26,7 @@ const Page = ({params,searchParams}) => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [ratings, setRatings] = useState({});
+  console.log(ratings)
 
   const cps = useSelector(state => state.customerslice?.cps)
 
@@ -34,6 +35,28 @@ const Page = ({params,searchParams}) => {
       ...prevRatings,
       [questionId]: { score, comment }
     }));
+  };
+
+  const handleSubmit = async () => {
+    const formattedRatings = Object.keys(ratings).map((questionId) => ({
+      cp: { ID: questionId },
+      score: ratings[questionId].score,
+      comment: ratings[questionId].comment
+    }));
+    console.log(formattedRatings)
+
+    // const response = await fetch('/api/submit-ratings', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ ratings: formattedRatings })
+    // });
+
+    // if (response.ok) {
+    //   alert('Ratings submitted successfully');
+    // } else {
+    //   alert('Error submitting ratings');
+    // }
+
   };
 
   
@@ -78,7 +101,12 @@ const Page = ({params,searchParams}) => {
       break;
   }
 
-  return <ContentComponent questions={questionSet} onRatingChange={handleRatingChange} />;
+  return <div>
+         <ContentComponent questions={questionSet} onRatingChange={handleRatingChange} />
+         {stepIndex === 7 && (
+        <button onClick={handleSubmit}>Submit Ratings</button>
+      )}
+  </div> ;
 };
 
 export default Page;

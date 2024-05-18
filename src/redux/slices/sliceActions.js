@@ -127,6 +127,18 @@ export const createUserPanel = createAsyncThunk(
     },
   )
 
+  export const getProfileStats = createAsyncThunk(
+    'profile/stats/fetch',
+    async () => {
+      return axios
+        .get(
+          `${baseUrl}/api/v1/council/sts`,
+          { withCredentials: false },
+        )
+        .then((res) => res.data)
+    },
+  )
+
 
 
   

@@ -4,12 +4,15 @@ import SnackBar from '@/components/shared/SnackBar'
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '@/redux/slices/sliceActions';
+import { ClipLoader, BarLoader } from 'react-spinners';
+
 
 const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const email = useRef(null);
   const password = useRef(null);
+  
   const [show, setshow] = useState({
     open:false,
     text: '',
@@ -19,20 +22,30 @@ const Login = () => {
   const customer = useSelector(state => state.customerslice)
 
   const handleSignIn = () => {
+    
     const details = {
       "email":email.current.value,
       "password":password.current.value
     }
     dispatch(loginUser(details))
-    .then((res)=>{
-      console.log(res)
-    })
+  //   .then((response)=>{
+  //     console.log(response)
+  //     if (response?.payload?.status === "Success"){
+  //       setshow({open:true, text: 'Login was successful', mood: 'success'})
+  //       router.push('/panel/dashboard') 
+  //     }else{
+  //       setshow({open:true, text: 'Failed, try again', mood: 'error'})
+  //     }
+  // })
+  
   }
 
   useEffect(() => {
     if(customer?.loading === false && customer.message === 'login successful'){
         setshow({open:true, text: 'Login was successful', mood: 'success'})
        router.push('/panel/dashboard')
+      }else {
+        setshow({open:true, text: 'Failed to login, try again', mood: 'error'})
       }
 }, [customer]);
 
@@ -50,7 +63,7 @@ const Login = () => {
           </p>
           <p className="text-gray-800 text-sm">
             Dont have an account?{" "}
-            <span className="text-yellow-500 text-sm">Register Now</span>{" "}
+            <a href='/panel/signup' className="text-yellow-500 text-sm">Register Now</a>{" "}
           </p>
         </div>
 
@@ -63,7 +76,7 @@ const Login = () => {
           </label>
           <input
           ref={email}
-            placeholder="example@gmail.com"
+            placeholder="Example@gmail.com"
             id="LoggingEmailAddress"
             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
             type="email"
@@ -85,7 +98,7 @@ const Login = () => {
 
           <input
           ref={password}
-            placeholder="enter your password"
+            placeholder="Enter your password"
             id="loggingPassword"
             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
             type="password"
@@ -93,8 +106,8 @@ const Login = () => {
         </div>
 
         <div className="mt-6">
-          <button onClick={handleSignIn} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
-            Continue
+          <button onClick={handleSignIn} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+          {customer?.loading?  ( <>Logging you in <BarLoader color='white'  /></>) : "Continue"}
           </button>
         </div>
 
@@ -142,6 +155,7 @@ const Login = () => {
           </a>
         </div>
       </div>
+      <SnackBar value={show.open} text={show.text} mood={show.mood}/>
     </div>
   );
 };

@@ -173,6 +173,58 @@ const Dashboard = () => {
                 <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" />
                 <h1 className="text-xl font-bold text-gray-800 ">SLI List</h1>
               </div>
+              {/* <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                              Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Level of Education
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                County
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Gender
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {slis?.data?.map((user, i) => (
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                       
+                          <>
+                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                          {user?.name}
+                          </th>
+                          <td class="px-6 py-4">
+                          {user?.levelOfEducation}
+                          </td>
+                          <td class="px-6 py-4">
+                          {user?.county}
+                          </td>
+                          <td class="px-6 py-4">
+                          {user.gender}
+                          </td>
+                          <td class="px-6 py-4">
+                          {user.status}
+                          </td>
+                          </>
+                          </tr>
+
+                        ))}
+                            
+                      
+                        
+                      
+                    </tbody>
+                </table>
+            </div> */}
 
               <TableContainer>
                 <Table>

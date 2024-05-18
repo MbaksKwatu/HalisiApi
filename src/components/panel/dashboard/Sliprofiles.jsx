@@ -18,15 +18,18 @@ import { LuFileSpreadsheet } from "react-icons/lu";
 import { BsEnvelopePaper } from "react-icons/bs";
 import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
+import { BsPersonAdd,BsPersonCheck  } from "react-icons/bs";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getSLIs } from "@/redux/slices/sliceActions";
+import { getSLIs, getProfileStats } from "@/redux/slices/sliceActions";
 
 const Sliprofiles = () => {
   const profileRef = useRef();
   const dispatch = useDispatch()
   const {user} = useSelector(state => state.customerslice);
   const slis = useSelector(state => state.customerslice?.slis)
+  const stats = useSelector(state => state.customerslice?.stats)
+  console.log(stats)
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isProfileActive, setIsProfileActive] = useState(false);
@@ -41,6 +44,7 @@ const Sliprofiles = () => {
   useEffect(() => {
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
     dispatch(getSLIs())
+    dispatch(getProfileStats())
   }, [page]);
 
   return (
@@ -129,30 +133,30 @@ const Sliprofiles = () => {
                 <div className="flex items-center w-full space-x-4">
                   <div className="w-1/2 ">
                     <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-black ">Interviews</p>
-                      <p className="text-xl font-bold text-black ">0 Upcoming</p>
+                      <p className="text-md font-semibold text-gray-600 ">{stats[0]?.count ? stats[0]?.count : 0 }</p>
+                      <p className="text-xl font-bold text-black "> New Profiles</p>
                       <p className="text-sm text-gray-400">
-                        View all Upcoming Interviews
+                        View all 
                       </p>
                       <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
-                        <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
+                        <BsPersonAdd className="text-cyan-500 h6 w-6" />
                       </span>
                     </div>
                   </div>
                   <div className="w-1/2">
-                    <div className="relative w-full px-4 py-6 bg-purple-100 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-black ">Resources</p>
-                      <p className="text-xl font-bold text-black ">Files</p>
+                    <div className="relative w-full px-4 py-6 bg-green-100 rounded-md shadow-lg ">
+                      <p className="text-md font-bold text-black ">{stats[1]?.count ? stats[1]?.count : 0 }</p>
+                      <p className="text-xl font-bold text-black ">Completed</p>
                       <p className="text-sm text-gray-400">
-                        View all Rating Process
+                        View all 
                       </p>
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
-                        <MdLockOutline className="text-purple-500 h5 w-5" />
+                        <BsPersonCheck  className="text-purple-500 h5 w-5" />
                       </span>
                     </div>
                   </div>
                   <div className="w-1/2">
-                    <div className="relative w-full px-4 py-6 bg-orange-200 rounded-md shadow-lg ">
+                    {/* <div className="relative w-full px-4 py-6 bg-orange-200 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-black ">SLI Profiles</p>
                       <p className="text-xl font-bold text-black ">0</p>
                       <p className="text-sm text-gray-400">
@@ -161,7 +165,7 @@ const Sliprofiles = () => {
                       <span className="absolute hidden lg:flex  p-4 border border-teal-500 rounded-md top-2 right-4">
                         <TbPhotoCheck className="text-teal-500 h5 w-5" />
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -180,7 +184,7 @@ const Sliprofiles = () => {
                       <TableCell>County</TableCell>
                       <TableCell>Gender</TableCell>
                       <TableCell>Date</TableCell>
-                      <TableCell>Status</TableCell>
+                      <TableCell>Action</TableCell>
                     </tr>
                   </TableHeader>
                   <TableBody>
