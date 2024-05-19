@@ -19,7 +19,7 @@ const Login = () => {
     mood: 'error'
   })
 
-  const customer = useSelector(state => state.customerslice)
+  const customer = useSelector(state => state.customer)
 
   const handleSignIn = () => {
     

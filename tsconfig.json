@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/panel/add-ratings/[[...stepIndex]]/PageAddListing4.jsx", "src/app/panel/add-ratings/[[...stepIndex]]/PageAddListing5.jsx", "src/app/panel/add-ratings/[[...stepIndex]]/PageAddListing6.jsx", "src/app/panel/add-ratings/[[...stepIndex]]/PageAddListing3.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/panel/add-ratings/[[...stepIndex]]/PageAddListing4.jsx", "src/app/panel/add-ratings/[[...stepIndex]]/PageAddListing5.jsx", "src/app/panel/add-ratings/[[...stepIndex]]/PageAddListing6.jsx", "src/app/panel/add-ratings/[[...stepIndex]]/PageAddListing3.jsx", "src/app/panel/add-ratings/[[...stepIndex]]/layout.jsx"],
   "exclude": ["node_modules"]
 }

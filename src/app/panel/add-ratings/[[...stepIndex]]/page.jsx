@@ -1,5 +1,6 @@
 'use client'
 import React, {useEffect, useState} from "react";
+import { RatingsProvider, useRatings } from './RatingsContext';
 import PageAddListing1 from "./PageAddListing1";
 import PageAddListing2 from "./PageAddListing2";
 import PageAddListing3 from "./PageAddListing3";
@@ -7,9 +8,12 @@ import PageAddListing4 from "./PageAddListing4";
 import PageAddListing5 from "./PageAddListing5";
 import PageAddListing6 from "./PageAddListing6";
 import PageAddListing7 from "./PageAddListing7";
+import { useSearchParams } from "next/navigation";
+
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getCPS } from "@/redux/slices/sliceActions";
+import { getCPS, createRatings } from "@/redux/slices/sliceActions";
+
 
 const splitQuestions = (questions) => {
   const questionGroups = [];
@@ -20,46 +24,23 @@ const splitQuestions = (questions) => {
 };
 
 
-const Page = ({params,searchParams}) => {
-  
+const PageContent = ({params}) => {
+  const searchParams = useSearchParams()
+  const sliId = searchParams.get('id')
+  console.log(sliId)
   const dispatch = useDispatch();
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [ratings, setRatings] = useState({});
+
+  const ratings = useSelector((state) => state.ratings.ratings);
   console.log(ratings)
 
-  const cps = useSelector(state => state.customerslice?.cps)
 
-  const handleRatingChange = (questionId, score, comment) => {
-    setRatings((prevRatings) => ({
-      ...prevRatings,
-      [questionId]: { score, comment }
-    }));
-  };
+  const cps = useSelector(state => state.customer?.cps)
+  const customer = useSelector(state => state.customer)
 
-  const handleSubmit = async () => {
-    const formattedRatings = Object.keys(ratings).map((questionId) => ({
-      cp: { ID: questionId },
-      score: ratings[questionId].score,
-      comment: ratings[questionId].comment
-    }));
-    console.log(formattedRatings)
 
-    // const response = await fetch('/api/submit-ratings', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ ratings: formattedRatings })
-    // });
 
-    // if (response.ok) {
-    //   alert('Ratings submitted successfully');
-    // } else {
-    //   alert('Error submitting ratings');
-    // }
-
-  };
-
-  
   useEffect(() => {
     dispatch(getCPS());
   }, []);
@@ -73,40 +54,61 @@ const Page = ({params,searchParams}) => {
   const stepIndex = Number(params.stepIndex);
   const questionSet = questions[stepIndex - 1] || [];
 
-  let ContentComponent = PageAddListing1;
-  switch (Number(params.stepIndex)) {
-    case 1:
-      ContentComponent = PageAddListing1;
-      break;
-    case 2:
-      ContentComponent = PageAddListing2;
-      break;
-    case 3:
-      ContentComponent = PageAddListing3;
-      break;
-    case 4:
-      ContentComponent = PageAddListing4;
-      break;
-    case 5:
-      ContentComponent = PageAddListing5;
-      break;
-    case 6:
-      ContentComponent = PageAddListing6;
-      break;
-    case 7:
-      ContentComponent = PageAddListing7;
-      break;
-    default:
-      ContentComponent = PageAddListing1;
-      break;
-  }
+  const stepComponents = [
+    PageAddListing1,
+    PageAddListing2,
+    PageAddListing3,
+    PageAddListing4,
+    PageAddListing5,
+    PageAddListing6,
+    PageAddListing7,
+  ];
 
-  return <div>
-         <ContentComponent questions={questionSet} onRatingChange={handleRatingChange} />
-         {stepIndex === 7 && (
-        <button onClick={handleSubmit}>Submit Ratings</button>
-      )}
-  </div> ;
+  const ContentComponent = stepComponents[stepIndex - 1] || PageAddListing1;
+
+
+
+  return (
+    <div>
+      <ContentComponent questions={questionSet}  />
+      {stepIndex === 6 && (
+      <button onClick={() => handleSubmit(ratings,sliId,customer,dispatch)} className="mt-3 bg-cyan-400 px-4 py-2 rounded-lg">Submit Ratings</button>
+    )}
+  </div> 
+  )
+ 
 };
+
+const handleSubmit = async (ratings,sliId,customer,dispatch) => {
+  const ratingsArray = Object.keys(ratings).map((key) => {
+    const rating = ratings[key];
+    return {
+      cp: {
+        ID: Number(key)
+      },
+      comment: rating.comment,
+      score: rating.score
+    };
+  });
+  const sli = {
+    "ID":sliId
+  }
+  const councilMemberArray = {
+    "ID": customer?.user?.id
+  }
+  const details = {
+    sli,
+    councilMember:councilMemberArray,
+    ratings:ratingsArray
+  }
+  console.log(details)
+  dispatch(createRatings(details))
+};
+
+const Page = ({ params }) => (
+  <RatingsProvider>
+    <PageContent params={params} />
+  </RatingsProvider>
+);
 
 export default Page;

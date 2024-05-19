@@ -139,6 +139,18 @@ export const createUserPanel = createAsyncThunk(
     },
   )
 
+  export const getDashboardStats = createAsyncThunk(
+    'dashboard/stats/fetch',
+    async () => {
+      return axios
+        .get(
+          `${baseUrl}/api/v1/council/dsb/stats`,
+          { withCredentials: false },
+        )
+        .then((res) => res.data)
+    },
+  )
+
 
 
   
