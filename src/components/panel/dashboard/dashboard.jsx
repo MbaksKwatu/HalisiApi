@@ -20,15 +20,16 @@ import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getSLIs } from "@/redux/slices/sliceActions";
+import { getSLIs, getDashboardStats } from "@/redux/slices/sliceActions";
 
 
 
 const Dashboard = () => {
   const profileRef = useRef();
   const dispatch = useDispatch()
-  const {user} = useSelector(state => state.customerslice);
-  const slis = useSelector(state => state.customerslice?.slis)
+  const {user} = useSelector(state => state.customer);
+  const slis = useSelector(state => state.customer?.slis)
+  const stats = useSelector(state => state.customer?.dstats)
  
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -44,6 +45,7 @@ const Dashboard = () => {
   useEffect(() => {
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
     dispatch(getSLIs())
+    dispatch(getDashboardStats())
   }, [page]);
 
   return (
@@ -103,7 +105,7 @@ const Dashboard = () => {
                     <div className="absolute z-10 top-12 right-0 w-64 rounded-lg bg-white shadow-md border text-sm text-gray-600">
                       <div className="p-2 text-left">
                         <span className="block text-gray-500/80 p-2">
-                          {"user@gmail.com"}
+                          {/* {"user@gmail.com"} */}
                         </span>
                         <a
                           href="/profile"
@@ -133,7 +135,7 @@ const Dashboard = () => {
                   <div className="w-1/2 ">
                     <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-black ">Interviews</p>
-                      <p className="text-xl font-bold text-black ">0 Upcoming</p>
+                      <p className="text-xl font-bold text-black ">{stats?.upcoming} Upcoming</p>
                       <p className="text-sm text-gray-400">
                         View all Upcoming Interviews
                       </p>
@@ -157,7 +159,7 @@ const Dashboard = () => {
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-orange-200 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-black ">SLI Profiles</p>
-                      <p className="text-xl font-bold text-black ">0</p>
+                      <p className="text-xl font-bold text-black ">{stats?.sliProfiles}</p>
                       <p className="text-sm text-gray-400">
                         View all SLI profiles
                       </p>
@@ -244,8 +246,7 @@ const Dashboard = () => {
                         <TableCell>
                           <div className="flex items-center text-sm">
                             <div>
-                              <p className="font-semibold">{user?.name}</p>
-                             
+                              <a href={`/panel/add-ratings/1?id=${user.ID}`} className="font-semibold">{user?.name}</a>
                             </div>
                           </div>
                           

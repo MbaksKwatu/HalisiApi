@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { FaBriefcase,FaRegStarHalfStroke  } from "react-icons/fa6";
+import Link from "next/link";
 
 export interface PageAddListing7Props {}
 
@@ -17,10 +18,13 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
         </p>
 
         <div className="flex space-x-4 mt-10">
+          <Link href={'/panel/dashboard'}>
           <div className="px-4 py-6 space-y-3 bg-teal-200 text-center rounded-lg">
              <div className="flex justify-center"><FaBriefcase className="w-6 h-6" /></div> 
             <p>Return to <br/> dashboard</p>
           </div>
+           </Link>
+         
           <div className="px-4 py-6 space-y-3 text-center bg-orange-100 rounded-lg">
             <div className="flex justify-center"><FaRegStarHalfStroke className="w-6 h-6" /></div>
             <p>Continue <br /> Rating </p>

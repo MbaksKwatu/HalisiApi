@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const TeamRatings = () => {
   const profileRef = useRef();
   const dispatch = useDispatch();
-  const {user} = useSelector(state => state.customerslice);
+  const {user} = useSelector(state => state.customer);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isProfileActive, setIsProfileActive] = useState(false);
@@ -97,7 +97,7 @@ const TeamRatings = () => {
                     <div className="absolute z-10 top-12 right-0 w-64 rounded-lg bg-white shadow-md border text-sm text-gray-600">
                       <div className="p-2 text-left">
                         <span className="block text-gray-500/80 p-2">
-                          {"user@gmail.com"}
+                          {/* {"user@gmail.com"} */}
                         </span>
                         <a
                           href="/profile"

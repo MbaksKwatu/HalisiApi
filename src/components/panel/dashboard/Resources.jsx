@@ -1,9 +1,11 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Sidebar from "./Sidebar";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Resources = () => {
     const profileRef = useRef();
+    const {user} = useSelector(state => state.customer);
     const [isProfileActive, setIsProfileActive] = useState(false);
   return (
     <main className="relative h-screen overflow-hidden bg-gray-100 ">
@@ -45,7 +47,7 @@ const Resources = () => {
                     className="flex items-center text-gray-500  text-md"
                     onClick={() => setIsProfileActive(!isProfileActive)}
                   >
-                    Samm
+                   <p>{user?.name}</p>  
                     <svg
                       width="20"
                       height="20"
