@@ -1,7 +1,18 @@
-import React from "react";
+'use client'
+import React, {useEffect} from "react";
 import { IoMdContact } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { getPanelistProfile } from "@/redux/slices/sliceActions";
 
 const Profile = () => {
+  const dispatch = useDispatch()
+  const customer = useSelector(state => state.customer)
+  const profile = useSelector(state => state.customer.profile)
+  
+  useEffect(() => {
+    dispatch(getPanelistProfile(customer?.user?.id))
+  }, []);
+
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="grid gap-10 row-gap-8 lg:grid-cols-5">
@@ -15,13 +26,13 @@ const Profile = () => {
             </a>
           </div>
           <div className="text-center">
-            <a
-              href="/"
-              aria-label="Author"
+            <p
+            
+              
               className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              James Mboya
-            </a>
+              {profile?.name}
+            </p>
             <p className="text-sm font-medium  text-gray-600">
               Parachichi Panelist
             </p>
@@ -91,6 +102,7 @@ const Profile = () => {
               <input
                 type="email"
                 required
+                value={profile?.name}
                 placeholder="Your full Name"
                 className=" mt-2 px-3 py-2 text-gray-500 bg-gray-300 outline-none border border-gray-400 focus:border-gray-600 shadow-sm rounded-lg"
               />
@@ -108,12 +120,13 @@ const Profile = () => {
                 </label>
                 <input
                   type="email"
+                  value={profile?.email}
                   placeholder="example@gmail.com"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-300 border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                 />
               </div>
 
-              <div>
+              {/* <div>
                 <label
                   class="text-gray-700 "
                   for="emailAddress"
@@ -125,16 +138,16 @@ const Profile = () => {
                   placeholder="********"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-300 border border-gray-200 rounded-md    focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className="border-b border-gray-200 px-2 mt-4 mb-2"></div>
 
-            <div class="flex justify-end mt-6">
+            {/* <div class="flex justify-end mt-6">
               <button class="px-8 py-2.5 leading-5 text-gray-800 transition-colors duration-300 transform bg-yellow-500 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
                 Update
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

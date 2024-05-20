@@ -4,6 +4,7 @@ import { FaRegFolder } from "react-icons/fa6";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import { BsPieChart } from "react-icons/bs";
+import {  usePathname } from "next/navigation";
 
 
 const Menu = (props) => {
@@ -46,6 +47,9 @@ const Menu = (props) => {
 }
 
 const Sidebar = () => {
+   
+    const pathname = usePathname()
+    
 
     const navigation = [
         {
@@ -130,7 +134,24 @@ const Sidebar = () => {
                         </div>
                     </div>
                     <div className="overflow-auto">
-                        <ul className="text-sm font-medium flex-1">
+                    <ul>
+                        {navigation.map((item, idx) => {
+                            const isActive = pathname === item.href;
+                            
+                            return (
+                                <li key={idx}>
+                                    <a 
+                                        href={item.href} 
+                                        className={`flex items-center gap-x-2 text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-orange-100 duration-150 ${isActive ? 'bg-orange-100' : ''}`}
+                                    >
+                                        <div className="text-gray-500">{item.icon}</div>
+                                        {item.name}
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                        {/* <ul className="text-sm font-medium flex-1">
                             {
                                 navigation.map((item, idx) => (
                                     <li key={idx}>
@@ -141,29 +162,9 @@ const Sidebar = () => {
                                     </li>
                                 ))
                             }
-                            {/* <li>
-                                <Menu items={nestedNav}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-500">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                                    </svg>
-                                    Billing
-                                </Menu>
-                            </li> */}
-                        </ul>
-                        {/* <div className="pt-2 mt-2 border-t">
-                            <ul className="text-sm font-medium">
-                                {
-                                    navsFooter.map((item, idx) => (
-                                        <li key={idx}>
-                                            <a href={item.href} className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150">
-                                                <div className="text-gray-500">{item.icon}</div>
-                                                {item.name}
-                                            </a>
-                                        </li>
-                                    ))
-                                }
-                            </ul>
-                        </div> */}
+                        
+                        </ul> */}
+                        
                     </div >
                 </div>
             </nav>

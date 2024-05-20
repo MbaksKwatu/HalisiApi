@@ -55,8 +55,8 @@ const Dashboard = () => {
           <div className="relative hidden h-screen  lg:block w-80">
             <Sidebar />
           </div>
-          <div className="flex flex-col w-full md:space-y-4">
-            <header className="z-40 flex items-center justify-between w-full h-16">
+          <div className="flex flex-col w-full md:space-y-4 ">
+            <header className="z-40 flex items-center justify-between w-full h-16 shadow-sm">
               <div className="block ml-6 lg:hidden">
                 <button className="flex items-center p-2 text-gray-500 bg-white rounded-full shadow text-md">
                   <svg
@@ -70,6 +70,11 @@ const Dashboard = () => {
                     <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"></path>
                   </svg>
                 </button>
+              </div>
+              <div className="flex text-2xl font-bold text-gray-900 space-x-3 ml-6 ">
+                <p>Parachichi </p>
+                <p>Dashboard</p>
+                
               </div>
               <div className="relative z-20 flex flex-col justify-end h-full px-3 md:w-full">
                 <div className="relative flex items-center justify-end w-full p-1 space-x-4">
@@ -126,7 +131,7 @@ const Dashboard = () => {
               </div>
             </header>
             <div className="h-screen px-4 pb-24 overflow-auto md:px-6">
-              <h1 className="text-2xl font-semibold text-gray-800 ">
+              <h1 className="text-xl font-semibold text-gray-800 ">
                 Overview
               </h1>
 
@@ -246,7 +251,7 @@ const Dashboard = () => {
                         <TableCell>
                           <div className="flex items-center text-sm">
                             <div>
-                              <a href={`/panel/add-ratings/1?id=${user.ID}`} className="font-semibold">{user?.name}</a>
+                              <a href={`/panel/sli-profiles/${user.ID}`} className="font-semibold">{user?.name}</a>
                             </div>
                           </div>
                           
@@ -267,7 +272,7 @@ const Dashboard = () => {
                           </span>
                         </TableCell>
                         <TableCell>
-                          <Badge type={user?.status}>{user.status}</Badge>
+                          <Badge type={user?.status == 'PENDING' ? 'primary' : 'success'}>{user.status}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}
