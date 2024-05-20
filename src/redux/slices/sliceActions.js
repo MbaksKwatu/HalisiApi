@@ -88,11 +88,11 @@ export const createUserPanel = createAsyncThunk(
 
   export const getSLIs = createAsyncThunk(
     'council/slis/fetch',
-    async () => {
-      // const statuss = statusFilter || ""
+    async (statusFilter) => {
+      const statuss = statusFilter || ""
       return axios
         .get(
-          `${baseUrl}/api/v1/council/slis`,
+          `${baseUrl}/api/v1/council/slis?status=${statuss}`,
           { withCredentials: false },
         )
         .then((res) => res.data)
@@ -159,6 +159,30 @@ export const createUserPanel = createAsyncThunk(
       return axios
         .get(
           `${baseUrl}/api/v1/users/${id}`,
+          { withCredentials: false },
+        )
+        .then((res) => res.data)
+    },
+  )
+
+  export const getSLIRatingStats = createAsyncThunk(
+    'panel/sliratingstats/fetch',
+    async () => {
+      return axios
+        .get(
+          `${baseUrl}/api/v1/council/ratings/stats`,
+          { withCredentials: false },
+        )
+        .then((res) => res.data)
+    },
+  )
+
+  export const getSLIRatings = createAsyncThunk(
+    'panel/sliratings/fetch',
+    async () => {
+      return axios
+        .get(
+          `${baseUrl}/api/v1/council/ratings`,
           { withCredentials: false },
         )
         .then((res) => res.data)

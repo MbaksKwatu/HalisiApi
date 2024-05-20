@@ -17,23 +17,28 @@ import Sidebar from "./Sidebar";
 
 
 import { useDispatch, useSelector } from 'react-redux';
+import { getSLIRatingStats , getSLIRatings } from "@/redux/slices/sliceActions";
 
 const TeamRatings = () => {
   const profileRef = useRef();
   const dispatch = useDispatch();
   const {user} = useSelector(state => state.customer);
+  const stats = useSelector(state => state.customer?.ratingstats);
+  const ratings = useSelector(state => state.customer?.ratings);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isProfileActive, setIsProfileActive] = useState(false);
 
   const resultsPerPage = 10;
-  const totalResults = response.length;
+  const totalResults = ratings?.metadata?.total;
 
   function onPageChange(p) {
     setPage(p);
   }
 
   useEffect(() => {
+    dispatch(getSLIRatingStats())
+    dispatch(getSLIRatings())
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 
@@ -129,7 +134,7 @@ const TeamRatings = () => {
                   <div className="w-1/2 ">
                     <div className="relative w-full px-4 py-6 bg-cyan-50 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-gray-500 ">Maximum SLI Score </p>
-                      <p className="text-xl font-bold text-cyan-300 ">40 / 60</p>
+                      <p className="text-xl font-bold text-cyan-300 ">{stats?.maximumSliScore} / 100</p>
                      
                       <span className="absolute hidden lg:flex  rounded-md top-2 right-4">
                       <div class="relative size-20 text-cyan-400 ">
@@ -138,7 +143,7 @@ const TeamRatings = () => {
                           <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-gray-200 " stroke-width="2"></circle>
                          
                           <g class="origin-center -rotate-90 transform">
-                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-cyan-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset="25"></circle>
+                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-cyan-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset={100 - stats?.maximumSliScore}></circle>
                           </g>
                         </svg>
                       </div>
@@ -149,7 +154,7 @@ const TeamRatings = () => {
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-purple-100 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-gray-500 ">Performance Score</p>
-                      <p className="text-xl font-bold text-black ">70%</p>
+                      <p className="text-xl font-bold text-black ">{stats?.performanceScore}%</p>
                       
                       <span className="absolute hidden lg:flex  rounded-md top-2 right-4">
                       <div class="relative size-20 text-purple-400 ">
@@ -158,7 +163,7 @@ const TeamRatings = () => {
                           <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-gray-200 " stroke-width="2"></circle>
                          
                           <g class="origin-center -rotate-90 transform">
-                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-purple-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset="20"></circle>
+                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-purple-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset={100 - stats?.performanceScore}></circle>
                           </g>
                         </svg>
                       </div>
@@ -169,7 +174,7 @@ const TeamRatings = () => {
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-blue-100 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-gray-500 ">Rating</p>
-                      <p className="text-xl font-bold text-black ">Pass</p>
+                      <p className="text-xl font-bold text-black ">{stats?.rating}%</p>
                      
                       <span className="absolute hidden lg:flex  rounded-md top-2 right-4">
                       <div class="relative size-20 text-blue-400 ">
@@ -178,7 +183,7 @@ const TeamRatings = () => {
                           <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-gray-200 " stroke-width="2"></circle>
                          
                           <g class="origin-center -rotate-90 transform">
-                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-blue-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset="30"></circle>
+                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-blue-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset={100 - stats?.rating}></circle>
                           </g>
                         </svg>
                       </div>
@@ -205,7 +210,7 @@ const TeamRatings = () => {
                     </tr>
                   </TableHeader>
                   <TableBody>
-                    {data.map((user, i) => (
+                    {ratings?.data?.map((user, i) => (
                       <TableRow key={i}>
                         <TableCell>
                           <div className="flex items-center text-sm">
@@ -216,11 +221,13 @@ const TeamRatings = () => {
                           </div>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user.amount}%</span>
+                          <span className="text-sm"> {user.panelScore}%</span>
                         </TableCell>
                         
                         <TableCell>
-                          <Badge type={user.status == 'Training' ? 'primary' : user.status == 'Passed' ? 'success' : 'warning'}>{user.status}</Badge>
+                          <Badge type={user.rating > '3.9' ? 'success' : user.rating > '3.4' && user.rating < '4.0' ? 'primary' : 'warning'}>
+                            {user.rating > '3.9' ? 'Passed' : user.rating > '3.4' && user.rating < '4.0' ? 'Traing' : 'Failed'}
+                            </Badge>
                         </TableCell>
                       </TableRow>
                     ))}

@@ -51,7 +51,7 @@ const Sliprofiles = () => {
 
   useEffect(() => {
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
-    dispatch(getSLIs())
+    dispatch(getSLIs(statusFilter))
     dispatch(getProfileStats())
   }, [page,statusFilter]);
 
@@ -218,12 +218,14 @@ const Sliprofiles = () => {
                     </tr>
                   </TableHeader>
                   <TableBody>
-                    {slis?.data?.map((user, i) => (
+                    {slis?.data?.length > 0 ? (
+                      <>
+                      {slis?.data?.map((user, i) => (
                       <TableRow key={i}>
                         <TableCell>
                         <div className="flex items-center text-sm">
                             <div>
-                              <a href={`/panel/sli-profiles/${user.ID}`} className="font-semibold">{user?.name}</a>
+                              <a href={`/panel/sli-profiles/${user.ID}`} className="font-semibold hover:underline decoration-orange-500">{user?.name}</a>
                             </div>
                           </div>
                         </TableCell>
@@ -244,8 +246,8 @@ const Sliprofiles = () => {
                         </TableCell>
                         <TableCell>
                           {user.status == 'PENDING' ? (
-                            <Link href={`/panel/add-ratings/1?id=${user.ID}`}>
-                            <Badge type={'primary'}>{'Rate' }</Badge>
+                            <Link href={`/panel/add-ratings/1?id=${user.ID}`} >
+                            <Badge className="hover:underline decoration-orange-500" type={'primary'}>{'Rate' }</Badge>
                             </Link>
                             
                           ):
@@ -255,6 +257,10 @@ const Sliprofiles = () => {
                         </TableCell>
                       </TableRow>
                     ))}
+                      </>
+                    ): 
+                    <p className="ml-3">No data found</p>
+                    }
                   </TableBody>
                 </Table>
                 <TableFooter>

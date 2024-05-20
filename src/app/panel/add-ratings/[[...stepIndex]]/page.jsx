@@ -9,6 +9,7 @@ import PageAddListing5 from "./PageAddListing5";
 import PageAddListing6 from "./PageAddListing6";
 import PageAddListing7 from "./PageAddListing7";
 import { useSearchParams } from "next/navigation";
+import { ClipLoader, BarLoader } from 'react-spinners';
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,13 +28,13 @@ const splitQuestions = (questions) => {
 const PageContent = ({params}) => {
   const searchParams = useSearchParams()
   const sliId = searchParams.get('id')
-  console.log(sliId)
   const dispatch = useDispatch();
   const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const ratings = useSelector((state) => state.ratings.ratings);
-  console.log(ratings)
+  const {loading} = useSelector(state => state.customer);
+
 
 
   const cps = useSelector(state => state.customer?.cps)
@@ -48,7 +49,7 @@ const PageContent = ({params}) => {
   useEffect(() => {
     const groupedQuestions = splitQuestions(cps);
     setQuestions(groupedQuestions);
-    setLoading(false);
+    // setLoading(false);
   }, [cps]);
 
   const stepIndex = Number(params.stepIndex);
@@ -72,7 +73,9 @@ const PageContent = ({params}) => {
     <div>
       <ContentComponent questions={questionSet}  />
       {stepIndex === 6 && (
-      <button onClick={() => handleSubmit(ratings,sliId,customer,dispatch)} className="mt-3 bg-cyan-400 px-4 py-2 rounded-lg">Submit Ratings</button>
+      <button onClick={() => handleSubmit(ratings,sliId,customer,dispatch)} className="mt-3 bg-cyan-400 px-4 py-2 rounded-lg">
+        {loading?  ( <> <ClipLoader color='white' size={10}  /> Please wait </>) : "Submit Ratings"}
+        </button>
     )}
   </div> 
   )
@@ -101,7 +104,7 @@ const handleSubmit = async (ratings,sliId,customer,dispatch) => {
     councilMember:councilMemberArray,
     ratings:ratingsArray
   }
-  console.log(details)
+ 
   dispatch(createRatings(details))
 };
 
