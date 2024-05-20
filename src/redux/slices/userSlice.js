@@ -14,7 +14,9 @@ const initialState = {
     cps:{},
     stats:{},
     dstats: {},
-    profile: {}
+    profile: {},
+    ratingstats : {},
+    ratings : {}
 
 }
 
@@ -164,6 +166,53 @@ const userSlice = createSlice({
               state.error = ""
       })
       builder.addCase(actions.getPanelistProfile.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getSLIRatingStats.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getSLIRatingStats.fulfilled, (state, action)=>{
+              state.loading = false
+              state.ratingstats = action.payload
+              state.message = "SLI rating stats fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getSLIRatingStats.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getSLIRatings.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getSLIRatings.fulfilled, (state, action)=>{
+              state.loading = false
+              state.ratings = action.payload
+              state.message = "SLI ratings  fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getSLIRatings.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.createRatings.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.createRatings.fulfilled, (state, action)=>{
+              state.loading = false
+              state.message = "SLI rated fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.createRatings.rejected, (state, action)=>{
               state.loading=false;
               state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
               state.message = action.error.message

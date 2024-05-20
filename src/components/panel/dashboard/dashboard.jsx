@@ -251,7 +251,7 @@ const Dashboard = () => {
                         <TableCell>
                           <div className="flex items-center text-sm">
                             <div>
-                              <a href={`/panel/sli-profiles/${user.ID}`} className="font-semibold">{user?.name}</a>
+                              <a href={`/panel/sli-profiles/${user.ID}`} className="font-semibold hover:underline decoration-orange-500">{user?.name}</a>
                             </div>
                           </div>
                           
