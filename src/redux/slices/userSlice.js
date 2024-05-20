@@ -10,9 +10,11 @@ const initialState = {
     // user: JSON.parse(localStorage.getItem("user")) || {},
     
     slis:{},
+    sli: {},
     cps:{},
     stats:{},
-    dstats: {}
+    dstats: {},
+    profile: {}
 
 }
 
@@ -88,6 +90,22 @@ const userSlice = createSlice({
               state.message = action.error.message
       })
 
+      builder.addCase(actions.getSLI.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getSLI.fulfilled, (state, action)=>{
+              state.loading = false
+              state.sli = action.payload
+              state.message = "sli fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getSLI.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
       builder.addCase(actions.getCPS.pending, (state)=>{
         state.loading = true;
       })
@@ -131,6 +149,21 @@ const userSlice = createSlice({
               state.error = ""
       })
       builder.addCase(actions.getDashboardStats.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+      builder.addCase(actions.getPanelistProfile.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getPanelistProfile.fulfilled, (state, action)=>{
+              state.loading = false
+              state.profile = action.payload
+              state.message = "Profile fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getPanelistProfile.rejected, (state, action)=>{
               state.loading=false;
               state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
               state.message = action.error.message

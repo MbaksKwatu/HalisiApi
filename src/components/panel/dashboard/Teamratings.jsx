@@ -14,10 +14,7 @@ import {
   Pagination,
 } from "@windmill/react-ui";
 import Sidebar from "./Sidebar";
-import { LuFileSpreadsheet } from "react-icons/lu";
-import { BsEnvelopePaper } from "react-icons/bs";
-import { MdLockOutline } from "react-icons/md";
-import { TbPhotoCheck } from "react-icons/tb";
+
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -48,7 +45,7 @@ const TeamRatings = () => {
             <Sidebar />
           </div>
           <div className="flex flex-col w-full md:space-y-4">
-            <header className="z-40 flex items-center justify-between w-full h-16">
+            <header className="z-40 flex items-center justify-between w-full h-16 shadow-sm">
               <div className="block ml-6 lg:hidden">
                 <button className="flex items-center p-2 text-gray-500 bg-white rounded-full shadow text-md">
                   <svg
@@ -62,6 +59,11 @@ const TeamRatings = () => {
                     <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"></path>
                   </svg>
                 </button>
+              </div>
+              <div className="flex text-2xl font-bold text-gray-900 space-x-3 ml-6 ">
+                <p>Parachichi </p>
+                <p>Dashboard</p>
+                
               </div>
               <div className="relative z-20 flex flex-col justify-end h-full px-3 md:w-full">
                 <div className="relative flex items-center justify-end w-full p-1 space-x-4">
@@ -218,7 +220,7 @@ const TeamRatings = () => {
                         </TableCell>
                         
                         <TableCell>
-                          <Badge type={user.status}>{user.status}</Badge>
+                          <Badge type={user.status == 'Training' ? 'primary' : user.status == 'Passed' ? 'success' : 'warning'}>{user.status}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}

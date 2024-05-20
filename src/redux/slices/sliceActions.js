@@ -89,6 +89,7 @@ export const createUserPanel = createAsyncThunk(
   export const getSLIs = createAsyncThunk(
     'council/slis/fetch',
     async () => {
+      // const statuss = statusFilter || ""
       return axios
         .get(
           `${baseUrl}/api/v1/council/slis`,
@@ -102,6 +103,7 @@ export const createUserPanel = createAsyncThunk(
   export const getSLI = createAsyncThunk(
     'sli/fetch',
     async ({ id, token }) => {
+      
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -145,6 +147,18 @@ export const createUserPanel = createAsyncThunk(
       return axios
         .get(
           `${baseUrl}/api/v1/council/dsb/stats`,
+          { withCredentials: false },
+        )
+        .then((res) => res.data)
+    },
+  )
+
+  export const getPanelistProfile = createAsyncThunk(
+    'panel/profile/fetch',
+    async (id) => {
+      return axios
+        .get(
+          `${baseUrl}/api/v1/users/${id}`,
           { withCredentials: false },
         )
         .then((res) => res.data)

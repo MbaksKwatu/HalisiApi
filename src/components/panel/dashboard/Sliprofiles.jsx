@@ -16,9 +16,12 @@ import {
 import Sidebar from "./Sidebar";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { BsPersonAdd,BsPersonCheck  } from "react-icons/bs";
+import { HiOutlineArrowDownOnSquare } from "react-icons/hi2";
+import { BiArrowFromBottom } from "react-icons/bi";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getSLIs, getProfileStats } from "@/redux/slices/sliceActions";
+import Link from "next/link";
 
 const Sliprofiles = () => {
   const profileRef = useRef();
@@ -26,10 +29,11 @@ const Sliprofiles = () => {
   const {user} = useSelector(state => state.customer);
   const slis = useSelector(state => state.customer?.slis)
   const stats = useSelector(state => state.customer?.stats)
-  console.log(stats)
+
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isProfileActive, setIsProfileActive] = useState(false);
+  const [statusFilter, setStatusFilter] = useState([])
 
   const resultsPerPage = 10;
   const totalResults = slis?.metadata?.total;
@@ -38,11 +42,18 @@ const Sliprofiles = () => {
     setPage(p);
   }
 
+  const handleFilter1 = () => {
+    setStatusFilter('PENDING')
+  }
+  const handleFilter2 = () => {
+    setStatusFilter('ACCEPTED')
+  }
+
   useEffect(() => {
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
     dispatch(getSLIs())
     dispatch(getProfileStats())
-  }, [page]);
+  }, [page,statusFilter]);
 
   return (
     <>
@@ -52,7 +63,7 @@ const Sliprofiles = () => {
             <Sidebar />
           </div>
           <div className="flex flex-col w-full md:space-y-4">
-            <header className="z-40 flex items-center justify-between w-full h-16">
+            <header className="z-40 flex items-center justify-between w-full h-16 shadow-sm">
               <div className="block ml-6 lg:hidden">
                 <button className="flex items-center p-2 text-gray-500 bg-white rounded-full shadow text-md">
                   <svg
@@ -66,6 +77,11 @@ const Sliprofiles = () => {
                     <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"></path>
                   </svg>
                 </button>
+              </div>
+              <div className="flex text-2xl font-bold text-gray-900 space-x-3 ml-6 ">
+                <p>Parachichi </p>
+                <p>Dashboard</p>
+                
               </div>
               <div className="relative z-20 flex flex-col justify-end h-full px-3 md:w-full">
                 <div className="relative flex items-center justify-end w-full p-1 space-x-4">
@@ -167,10 +183,27 @@ const Sliprofiles = () => {
                 </div>
               </div>
 
-              <div className="flex space-x-2">
+              <div className="flex justify-between">
+              <div className="inline-flex space-x-2">
                 <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" />
                 <h1 className="text-xl font-bold text-gray-800 ">SLI List</h1>
               </div>
+              <div className="inline-flex space-x-4 mb-2">
+                <button onClick={handleFilter1} className="flex space-x-2  bg-teal-50 text-teal-400 px-2 rounded-lg py-2">
+                  <HiOutlineArrowDownOnSquare className="w-5 h-5"/>
+                 <p className="">Unrated</p>
+                </button>
+                   
+                <button onClick={handleFilter2} className="flex space-x-2 bg-green-100 text-green-600 px-4 py-2 rounded-lg">
+                  <BiArrowFromBottom className="w-5 h-5"/>
+                <p className="">Completed</p>
+                </button>
+                    
+              </div>
+
+              </div>
+
+             
 
               <TableContainer>
                 <Table>
@@ -190,7 +223,7 @@ const Sliprofiles = () => {
                         <TableCell>
                         <div className="flex items-center text-sm">
                             <div>
-                              <a href={`/panel/add-ratings/1?id=${user.ID}`} className="font-semibold">{user?.name}</a>
+                              <a href={`/panel/sli-profiles/${user.ID}`} className="font-semibold">{user?.name}</a>
                             </div>
                           </div>
                         </TableCell>
@@ -210,7 +243,15 @@ const Sliprofiles = () => {
                           </span>
                         </TableCell>
                         <TableCell>
-                          <Badge type={user.status}>{user.status}</Badge>
+                          {user.status == 'PENDING' ? (
+                            <Link href={`/panel/add-ratings/1?id=${user.ID}`}>
+                            <Badge type={'primary'}>{'Rate' }</Badge>
+                            </Link>
+                            
+                          ):
+                          <Badge type={'success'}>{'Completed'}</Badge>
+                          }
+                          
                         </TableCell>
                       </TableRow>
                     ))}
