@@ -20,10 +20,10 @@ import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
 import { HiOutlineArrowDownOnSquare } from "react-icons/hi2";
 import { BiArrowFromBottom } from "react-icons/bi";
-import Header from './Header'
+import Header from '../Header'
 
 
-const Dashboard = () => {
+const Bookedjobs = () => {
   const profileRef = useRef();
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -60,31 +60,35 @@ const Dashboard = () => {
                     <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">New</p>
                       <p className="text-xl font-bold text-black ">12</p>
-                      
+                      {/* <p className="text-sm text-gray-400">
+                        View all Upcoming Submissions
+                      </p> */}
                       <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
                         <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
                       </span>
                     </div>
                   </div>
                   <div className="w-1/2">
-                    <div className="relative w-full px-4 py-6 bg-orange-100 rounded-md shadow-lg ">
-                      <p className="text-xl font-bold text-black ">Booked</p>
+                    <div className="relative w-full px-4 py-6 bg-green-100 rounded-md shadow-lg ">
+                      <p className="text-xl font-bold text-black ">Completed</p>
                       <p className="text-xl font-bold text-black ">15</p>
-                      
+                      {/* <p className="text-sm text-gray-400">
+                        View all Booked Jobs
+                      </p> */}
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
                         <MdLockOutline className="text-purple-500 h5 w-5" />
                       </span>
                     </div>
                   </div>
                   <div className="w-1/2">
-                    <div className="relative w-full px-4 py-6 bg-green-200 rounded-md shadow-lg ">
+                    {/* <div className="relative w-full px-4 py-6 bg-green-200 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">Completed</p>
                       <p className="text-xl font-bold text-black ">15</p>
                       
                       <span className="absolute hidden lg:flex  p-4 border border-teal-500 rounded-md top-2 right-4">
                         <TbPhotoCheck className="text-teal-500 h5 w-5" />
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -93,24 +97,9 @@ const Dashboard = () => {
               <div className="flex justify-between">
               <div className="inline-flex space-x-2">
                 <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" />
-                <h1 className="text-xl font-bold text-gray-800 ">Task List</h1>
+                <h1 className="text-xl font-bold text-gray-800 ">Job List</h1>
               </div>
-              <div className="inline-flex space-x-4 mb-2">
-                <button 
-                // onClick={handleFilter1}
-                 className="flex space-x-2  bg-teal-50 text-teal-400 px-2 rounded-lg py-2">
-                  <HiOutlineArrowDownOnSquare className="w-5 h-5"/>
-                 <p className="">New</p>
-                </button>
-                   
-                <button 
-                // onClick={handleFilter2} 
-                className="flex space-x-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-lg">
-                  <MdLockOutline className="w-5 h-5"/>
-                <p className="">In progress</p>
-                </button>
-                    
-              </div>
+              
 
               </div>
 
@@ -173,4 +162,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Bookedjobs;
