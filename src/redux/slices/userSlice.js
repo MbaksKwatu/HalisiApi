@@ -23,6 +23,12 @@ const initialState = {
 const userSlice = createSlice({
     name: "customer",
     initialState,
+    reducers: {
+        logout : (state) => {
+                state.user = null;
+                localStorage.removeItem('user');
+        }
+    },
     extraReducers: (builder)=>{
         builder.addCase(actions.createUserPanel.pending, (state)=>{
             state.loading =true
@@ -57,6 +63,7 @@ const userSlice = createSlice({
               state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
               state.message = action.error.message
       })
+
 
       builder.addCase(actions.logout.pending, (state)=>{
           state.loading = true;
@@ -221,5 +228,7 @@ const userSlice = createSlice({
 
     }
 })
+
+export const {  logout } = userSlice.actions;
 
 export default userSlice.reducer;
