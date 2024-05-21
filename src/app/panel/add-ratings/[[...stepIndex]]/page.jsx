@@ -10,6 +10,7 @@ import PageAddListing6 from "./PageAddListing6";
 import PageAddListing7 from "./PageAddListing7";
 import { useSearchParams } from "next/navigation";
 import { ClipLoader, BarLoader } from 'react-spinners';
+import SnackBar from '@/components/shared/SnackBar'
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,17 +34,26 @@ const PageContent = ({params}) => {
   // const [loading, setLoading] = useState(true);
 
   const ratings = useSelector((state) => state.ratings.ratings);
-  const {loading} = useSelector(state => state.customer);
+  const {loading, message} = useSelector(state => state.customer);
 
 
 
   const cps = useSelector(state => state.customer?.cps)
   const customer = useSelector(state => state.customer)
 
+  const [show, setshow] = useState({
+    open:false,
+    text: '',
+    mood: 'error'
+  })
+
 
 
   useEffect(() => {
     dispatch(getCPS());
+    if (message == "SLI rated successfully") {
+      setshow({open:true, text: 'SLI rated successfully', mood: 'success'})
+    }
   }, []);
 
   useEffect(() => {
@@ -74,9 +84,10 @@ const PageContent = ({params}) => {
       <ContentComponent questions={questionSet}  />
       {stepIndex === 6 && (
       <button onClick={() => handleSubmit(ratings,sliId,customer,dispatch)} className="mt-3 bg-cyan-400 px-4 py-2 rounded-lg">
-        {loading?  ( <> <ClipLoader color='white' size={10}  /> Please wait </>) : "Submit Ratings"}
+        {loading?  ( <> <ClipLoader color='white' size={20}  /> Please wait </>) : "Submit Ratings"}
         </button>
     )}
+    <SnackBar value={show.open} text={show.text} mood={show.mood}/>
   </div> 
   )
  
@@ -104,6 +115,7 @@ const handleSubmit = async (ratings,sliId,customer,dispatch) => {
     councilMember:councilMemberArray,
     ratings:ratingsArray
   }
+ 
  
   dispatch(createRatings(details))
 };

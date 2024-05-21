@@ -33,6 +33,7 @@ export const createUserPanel = createAsyncThunk(
   export const createRatings = createAsyncThunk(
     'panel/create/rating',
     async (details) => {
+     
       return axios
         .post(
           `${baseUrl}/api/v1/council/rate`,
