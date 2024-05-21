@@ -73,9 +73,9 @@ const Dashboard = () => {
                     <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-black ">Interviews</p>
                       <p className="text-xl font-bold text-black ">{stats?.upcoming} Upcoming</p>
-                      <p className="text-sm text-gray-400">
+                      {/* <p className="text-sm text-gray-400">
                         View all Upcoming Interviews
-                      </p>
+                      </p> */}
                       <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
                         <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
                       </span>
@@ -85,9 +85,9 @@ const Dashboard = () => {
                     <div className="relative w-full px-4 py-6 bg-purple-100 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-black ">Resources</p>
                       <p className="text-xl font-bold text-black ">Files</p>
-                      <p className="text-sm text-gray-400">
+                      {/* <p className="text-sm text-gray-400">
                         View all Rating Process
-                      </p>
+                      </p> */}
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
                         <MdLockOutline className="text-purple-500 h5 w-5" />
                       </span>
@@ -97,9 +97,9 @@ const Dashboard = () => {
                     <div className="relative w-full px-4 py-6 bg-orange-200 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-black ">SLI Profiles</p>
                       <p className="text-xl font-bold text-black ">{stats?.sliProfiles}</p>
-                      <p className="text-sm text-gray-400">
+                      {/* <p className="text-sm text-gray-400">
                         View all SLI profiles
-                      </p>
+                      </p> */}
                       <span className="absolute hidden lg:flex  p-4 border border-teal-500 rounded-md top-2 right-4">
                         <TbPhotoCheck className="text-teal-500 h5 w-5" />
                       </span>

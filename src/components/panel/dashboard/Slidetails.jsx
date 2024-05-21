@@ -8,6 +8,8 @@ import useAuth from '@/hooks/useAuth'
 import { IoMdStarHalf } from "react-icons/io";
 import { PiShootingStarThin } from "react-icons/pi";
 import Link from "next/link";
+import { IoIosArrowRoundBack } from "react-icons/io";
+
 
 const SliProfileDetail = ({params}) => {
   useAuth();
@@ -53,7 +55,14 @@ const SliProfileDetail = ({params}) => {
                  </button>
                     }
                    
-                    <button className="border border-yellow-500 text-yellow-700 px-4 py-2 rounded-md">Make an offer</button>
+                   <Link href={`/panel/dashboard`}>
+                     <button className="border border-yellow-500 flex space-x-2 text-yellow-700 px-4 py-2 rounded-md">
+                       <IoIosArrowRoundBack className="w-5 h-5"/>
+                        Dashboard
+                      </button>
+                   </Link>
+                    
+
                   </div>
                 </div>
                 <div className="border-b-2 border-yellow-500 mb-4">

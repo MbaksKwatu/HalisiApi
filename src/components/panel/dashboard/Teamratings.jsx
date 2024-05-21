@@ -61,29 +61,10 @@ const TeamRatings = () => {
 
               <div className="flex flex-col items-center w-full my-6 space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
                 <div className="flex items-center w-full space-x-4">
-                  <div className="w-1/2 ">
-                    <div className="relative w-full px-4 py-6 bg-cyan-50 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-gray-500 ">Maximum SLI Score </p>
-                      <p className="text-xl font-bold text-cyan-300 ">{stats?.maximumSliScore} / 100</p>
-                     
-                      <span className="absolute hidden lg:flex  rounded-md top-2 right-4">
-                      <div class="relative size-20 text-cyan-400 ">
-                        <svg class="size-full" width="38" height="38" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                         
-                          <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-gray-200 " stroke-width="2"></circle>
-                         
-                          <g class="origin-center -rotate-90 transform">
-                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-cyan-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset={100 - stats?.maximumSliScore}></circle>
-                          </g>
-                        </svg>
-                      </div>
-                        {/* <BsEnvelopePaper className="text-cyan-500 h5 w-5" /> */}
-                      </span>
-                    </div>
-                  </div>
+                  
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-purple-100 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-gray-500 ">Performance Score</p>
+                      <p className="text-md font-bold text-gray-500 ">Individual Rating</p>
                       <p className="text-xl font-bold text-black ">{stats?.performanceScore}%</p>
                       
                       <span className="absolute hidden lg:flex  rounded-md top-2 right-4">
@@ -97,13 +78,13 @@ const TeamRatings = () => {
                           </g>
                         </svg>
                       </div>
-                        {/* <MdLockOutline className="text-purple-500 h5 w-5" /> */}
+                      
                       </span>
                     </div>
                   </div>
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-blue-100 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-gray-500 ">Rating</p>
+                      <p className="text-md font-bold text-gray-500 ">Overall Rating</p>
                       <p className="text-xl font-bold text-black ">{stats?.rating}%</p>
                      
                       <span className="absolute hidden lg:flex  rounded-md top-2 right-4">
@@ -120,6 +101,26 @@ const TeamRatings = () => {
                         {/* <TbPhotoCheck className="text-teal-500 h5 w-5" /> */}
                       </span>
                     </div>
+                  </div>
+                  <div className="w-1/2 ">
+                    {/* <div className="relative w-full px-4 py-6 bg-cyan-50 rounded-md shadow-lg ">
+                      <p className="text-md font-bold text-gray-500 ">Maximum SLI Score </p>
+                      <p className="text-xl font-bold text-cyan-300 ">{stats?.maximumSliScore} / 100</p>
+                     
+                      <span className="absolute hidden lg:flex  rounded-md top-2 right-4">
+                      <div class="relative size-20 text-cyan-400 ">
+                        <svg class="size-full" width="38" height="38" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                         
+                          <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-gray-200 " stroke-width="2"></circle>
+                         
+                          <g class="origin-center -rotate-90 transform">
+                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-cyan-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset={100 - stats?.maximumSliScore}></circle>
+                          </g>
+                        </svg>
+                      </div>
+                       
+                      </span>
+                    </div> */}
                   </div>
                 </div>
               </div>
