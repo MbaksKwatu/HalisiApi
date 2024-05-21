@@ -79,9 +79,9 @@ const Sliprofiles = () => {
                     <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
                       <p className="text-md font-semibold text-gray-600 ">{stats[0]?.count ? stats[0]?.count : 0 }</p>
                       <p className="text-xl font-bold text-black "> New Profiles</p>
-                      <p className="text-sm text-gray-400">
+                      {/* <p className="text-sm text-gray-400">
                         View all 
-                      </p>
+                      </p> */}
                       <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
                         <BsPersonAdd className="text-cyan-500 h6 w-6" />
                       </span>
@@ -91,9 +91,9 @@ const Sliprofiles = () => {
                     <div className="relative w-full px-4 py-6 bg-green-100 rounded-md shadow-lg ">
                       <p className="text-md font-bold text-black ">{stats[1]?.count ? stats[1]?.count : 0 }</p>
                       <p className="text-xl font-bold text-black ">Completed</p>
-                      <p className="text-sm text-gray-400">
+                      {/* <p className="text-sm text-gray-400">
                         View all 
-                      </p>
+                      </p> */}
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
                         <BsPersonCheck  className="text-purple-500 h5 w-5" />
                       </span>

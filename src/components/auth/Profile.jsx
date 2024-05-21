@@ -17,7 +17,7 @@ const Profile = () => {
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="grid gap-10 row-gap-8 lg:grid-cols-5">
         <div className="lg:col-span-2   px-4 py-6">
-          <p className="text-sm">Home</p>
+          <a href="/panel/dashboard" className="text-sm  hover:underline decoration-orange-500 ">Home</a>
           <p className="text-xl font-semibold mb-3">Profile</p>
           <div className="border border-gray-200 px-4 py-6">
           <div className="flex justify-center">
@@ -36,7 +36,7 @@ const Profile = () => {
             <p className="text-sm font-medium  text-gray-600">
               Parachichi Panelist
             </p>
-            <div className="flex mt-4 justify-center items-center gap-x-4 text-yellow-600 text-sm">
+            {/* <div className="flex mt-4 justify-center items-center gap-x-4 text-yellow-600 text-sm">
               <div className="flex">
                 <svg
                   className="w-5 h-5"
@@ -79,7 +79,7 @@ const Profile = () => {
                   <path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" />
                 </svg>
               </div>
-            </div>
+            </div> */}
           </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ const Profile = () => {
             <p className="mb-2 text-xl font-semibold tracking-wide text-gray-900 ">
               Profile
             </p>
-            <div className="w-64  mb-3">
+            <div className=" mb-3">
               <label className="font-semibold text-gray-800">Names</label>
               <input
                 type="email"

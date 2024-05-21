@@ -21,8 +21,8 @@ const Login = () => {
 
   const customer = useSelector(state => state.customer)
 
-  const handleSignIn = () => {
-    
+  const handleSignIn = (e) => {
+    e.preventDefault()
     const details = {
       "email":email.current.value,
       "password":password.current.value
@@ -44,8 +44,6 @@ const Login = () => {
     if(customer?.loading === false && customer.message === 'login successful'){
         setshow({open:true, text: 'Login was successful', mood: 'success'})
        router.push('/panel/dashboard')
-      }else {
-        setshow({open:true, text: 'Failed to login, try again', mood: 'error'})
       }
 }, [customer]);
 
@@ -80,6 +78,7 @@ const Login = () => {
             id="LoggingEmailAddress"
             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
             type="email"
+            required
           />
         </div>
 
@@ -102,6 +101,7 @@ const Login = () => {
             id="loggingPassword"
             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
             type="password"
+            required
           />
         </div>
 

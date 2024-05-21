@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@/redux/slices/userSlice';
+import SnackBar from '@/components/shared/SnackBar'
 
 const Header = () => {
     const profileRef = useRef();
@@ -8,8 +9,16 @@ const Header = () => {
     const [isProfileActive, setIsProfileActive] = useState(false);
     const {user} = useSelector(state => state.customer);
 
+    const [show, setshow] = useState({
+      open:false,
+      text: '',
+      mood: 'error'
+    })
+
+
     const handleLogout = () => {
-        dispatch(logout());
+        dispatch(logout())
+        setshow({open:true, text: 'Logout was successful', mood: 'info'})
       };
 
   return (
@@ -86,6 +95,7 @@ const Header = () => {
                   )}
                 </div>
               </div>
+              <SnackBar value={show.open} text={show.text} mood={show.mood}/>
             </header>
   )
 }
