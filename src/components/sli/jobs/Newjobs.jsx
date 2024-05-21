@@ -20,10 +20,10 @@ import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
 import { HiOutlineArrowDownOnSquare } from "react-icons/hi2";
 import { BiArrowFromBottom } from "react-icons/bi";
-import Header from './Header'
+import Header from '../Header'
 
 
-const Dashboard = () => {
+const Newjobs = () => {
   const profileRef = useRef();
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -49,6 +49,7 @@ const Dashboard = () => {
           </div>
           <div className="flex flex-col w-full md:space-y-4">
             <Header/>
+           
             <div className="h-screen px-4 pb-24 overflow-auto md:px-6">
               <h1 className="text-2xl font-semibold text-gray-800 ">
                 Overview
@@ -56,19 +57,10 @@ const Dashboard = () => {
 
               <div className="flex flex-col items-center w-full my-6 space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
                 <div className="flex items-center w-full space-x-4">
-                  <div className="w-1/2 ">
-                    <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
-                      <p className="text-xl font-bold text-black ">New</p>
-                      <p className="text-xl font-bold text-black ">12</p>
-                      
-                      <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
-                        <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
-                      </span>
-                    </div>
-                  </div>
+                  
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-orange-100 rounded-md shadow-lg ">
-                      <p className="text-xl font-bold text-black ">Booked</p>
+                      <p className="text-xl font-bold text-black ">In progress</p>
                       <p className="text-xl font-bold text-black ">15</p>
                       
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
@@ -76,6 +68,7 @@ const Dashboard = () => {
                       </span>
                     </div>
                   </div>
+                  
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-green-200 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">Completed</p>
@@ -86,6 +79,16 @@ const Dashboard = () => {
                       </span>
                     </div>
                   </div>
+                  <div className="w-1/2 ">
+                    {/* <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
+                      <p className="text-xl font-bold text-black ">New</p>
+                      <p className="text-xl font-bold text-black ">12</p>
+                      
+                      <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
+                        <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
+                      </span>
+                    </div> */}
+                  </div>
                 </div>
               </div>
 
@@ -95,22 +98,7 @@ const Dashboard = () => {
                 <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" />
                 <h1 className="text-xl font-bold text-gray-800 ">Task List</h1>
               </div>
-              <div className="inline-flex space-x-4 mb-2">
-                <button 
-                // onClick={handleFilter1}
-                 className="flex space-x-2  bg-teal-50 text-teal-400 px-2 rounded-lg py-2">
-                  <HiOutlineArrowDownOnSquare className="w-5 h-5"/>
-                 <p className="">New</p>
-                </button>
-                   
-                <button 
-                // onClick={handleFilter2} 
-                className="flex space-x-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-lg">
-                  <MdLockOutline className="w-5 h-5"/>
-                <p className="">In progress</p>
-                </button>
-                    
-              </div>
+              
 
               </div>
 
@@ -173,4 +161,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Newjobs;
