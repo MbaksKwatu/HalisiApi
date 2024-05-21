@@ -111,7 +111,7 @@ const Login = () => {
           </button>
         </div>
 
-        <div className="flex items-center justify-between mt-4">
+        {/* <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b  md:w-1/4"></span>
 
           <a
@@ -122,8 +122,8 @@ const Login = () => {
           </a>
 
           <span className="w-1/5 border-b  md:w-1/4"></span>
-        </div>
-        <div className="flex justify-center text-center">
+        </div> */}
+        {/* <div className="flex justify-center text-center">
           <a
             href="#"
             className="flex items-center w-40 justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 "
@@ -153,7 +153,7 @@ const Login = () => {
               Google
             </span>
           </a>
-        </div>
+        </div> */}
       </div>
       <SnackBar value={show.open} text={show.text} mood={show.mood}/>
     </div>

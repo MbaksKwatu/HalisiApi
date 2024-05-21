@@ -70,7 +70,6 @@ const Sidebar = () => {
             href: '/panel/sli-profiles',
             name: 'SLI Profiles',
             icon: <IoIosPeople className="w-6 h-6"/>
-
             ,
         },
         {

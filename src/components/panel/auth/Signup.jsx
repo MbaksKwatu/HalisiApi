@@ -54,7 +54,7 @@ const Signup = () => {
           Get started now
         </p>
 
-        <a
+        {/* <a
           href="#"
           className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 "
         >
@@ -82,9 +82,9 @@ const Signup = () => {
           <span className="w-5/6 px-4 py-3 font-semibold text-center">
             Sign up with Google
           </span>
-        </a>
+        </a> */}
 
-        <div className="flex items-center justify-between mt-4">
+        {/* <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b  lg:w-1/4"></span>
 
           <a
@@ -95,7 +95,7 @@ const Signup = () => {
           </a>
 
           <span className="w-1/5 border-b  lg:w-1/4"></span>
-        </div>
+        </div> */}
 
         <div className="mt-4">
           <label
