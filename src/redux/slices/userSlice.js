@@ -216,7 +216,7 @@ const userSlice = createSlice({
 
       builder.addCase(actions.createRatings.fulfilled, (state, action)=>{
               state.loading = false
-              state.message = "SLI rated fetched successfully"
+              state.message = "SLI rated successfully"
               state.error = ""
       })
       builder.addCase(actions.createRatings.rejected, (state, action)=>{

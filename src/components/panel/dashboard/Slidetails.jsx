@@ -5,6 +5,9 @@ import Header from "./Header"
 import { useDispatch, useSelector } from 'react-redux';
 import { getSLI } from "@/redux/slices/sliceActions";
 import useAuth from '@/hooks/useAuth'
+import { IoMdStarHalf } from "react-icons/io";
+import { PiShootingStarThin } from "react-icons/pi";
+import Link from "next/link";
 
 const SliProfileDetail = ({params}) => {
   useAuth();
@@ -34,7 +37,22 @@ const SliProfileDetail = ({params}) => {
                 <div className="items-center  mb-4">
                   <h1 className="text-2xl font-semibold text-gray-700">{sli?.name}</h1>
                   <div className="flex space-x-2 mt-4">
-                    <button className="bg-yellow-500 text-yellow-700 px-4 py-2 rounded-md hover:bg-yellow-600">Rate Now</button>
+                    {sli?.status == 'PENDING' ? (
+                      <Link href={`/panel/add-ratings/1?id=${sli?.ID}`} >
+                       <button className="bg-yellow-500 flex space-x-2 text-yellow-700 px-4 py-2 rounded-md hover:bg-yellow-600">
+                        <IoMdStarHalf className="w-5 h-5" />
+                        <p> Rate Now</p>
+                      </button>
+                      </Link>
+                      
+
+                    ):
+                    <button className="bg-teal-400 flex space-x-2 text-teal-700 px-4 py-2 rounded-md hover:bg-teal-600">
+                    <PiShootingStarThin className="w-5 h-5" />
+                    <p> Rated</p>
+                 </button>
+                    }
+                   
                     <button className="border border-yellow-500 text-yellow-700 px-4 py-2 rounded-md">Make an offer</button>
                   </div>
                 </div>
