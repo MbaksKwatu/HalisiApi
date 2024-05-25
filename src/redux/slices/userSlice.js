@@ -16,7 +16,11 @@ const initialState = {
     dstats: {},
     profile: {},
     ratingstats : {},
-    ratings : {}
+    ratings : {},
+    jobs : {},
+    trainingstats: {},
+    trainingtasks: {},
+    trainingtask: {}
 
 }
 
@@ -220,6 +224,70 @@ const userSlice = createSlice({
               state.error = ""
       })
       builder.addCase(actions.createRatings.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getJobs.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getJobs.fulfilled, (state, action)=>{
+              state.loading = false
+              state.jobs = action.payload
+              state.message = "Jobs fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getJobs.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getTrainingStats.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getTrainingStats.fulfilled, (state, action)=>{
+              state.loading = false
+              state.trainingstats = action.payload
+              state.message = "Training stats fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getTrainingStats.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getTrainingTasks.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getTrainingTasks.fulfilled, (state, action)=>{
+              state.loading = false
+              state.trainingtasks = action.payload
+              state.message = "Training tasks fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getTrainingTasks.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getTrainingTask.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getTrainingTask.fulfilled, (state, action)=>{
+              state.loading = false
+              state.trainingtask = action.payload
+              state.message = "Training task fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getTrainingTask.rejected, (state, action)=>{
               state.loading=false;
               state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
               state.message = action.error.message

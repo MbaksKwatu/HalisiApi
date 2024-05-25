@@ -67,7 +67,7 @@ export const createUserPanel = createAsyncThunk(
         ...details ,
         withCredentials: true,
       })
-      return response
+      return response.data
       
     },
   )
@@ -200,6 +200,73 @@ export const createUserPanel = createAsyncThunk(
           { withCredentials: false },
         )
         .then((res) => res.data)
+    },
+  )
+
+  export const getJobs = createAsyncThunk(
+    'sli/jobs/fetch',
+    async ({ token }) => {
+      
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.get(`${baseUrl}/api/v1/jobs`, {
+        ...config,
+        withCredentials: true,
+      })
+      return response.data
+    },
+  )
+
+  export const getTrainingStats = createAsyncThunk(
+    'sli/training/stats',
+    async ({ token }) => {
+      
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.get(`${baseUrl}/api/v1/si/training/tasks/stats`, {
+        ...config,
+        withCredentials: true,
+      })
+      return response.data
+    },
+  )
+
+  export const getTrainingTasks = createAsyncThunk(
+    'sli/training/tasks',
+    async ({ token, statusFilter }) => {
+      const statuss = statusFilter || ""
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.get(`${baseUrl}/api/v1/si/training/tasks?status=${statuss}`, {
+        ...config,
+        withCredentials: true,
+      })
+      return response.data
+    },
+  )
+
+  export const getTrainingTask = createAsyncThunk(
+    'sli/training/task',
+    async ({ id, token }) => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.get(`${baseUrl}/api/v1/training/${id}`, {
+        ...config,
+        withCredentials: true,
+      })
+      return response.data
     },
   )
 

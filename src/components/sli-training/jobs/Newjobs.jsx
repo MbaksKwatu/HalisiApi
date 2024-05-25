@@ -13,19 +13,19 @@ import {
   Badge,
   Pagination,
 } from "@windmill/react-ui";
-import Sidebar from "@/components/sli/Sidebar";
+import Sidebar from "@/components/sli-training/Sidebar";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { BsEnvelopePaper } from "react-icons/bs";
 import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
 import { HiOutlineArrowDownOnSquare } from "react-icons/hi2";
 import { BiArrowFromBottom } from "react-icons/bi";
-import Header from './Header'
+import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux';
-import { getJobs } from "@/redux/slices/sliceActions";
+import { getTrainingTasks } from "@/redux/slices/sliceActions";
 
 
-const Dashboard = () => {
+const Newjobs = () => {
   const dispatch = useDispatch()
   const profileRef = useRef();
   const [page, setPage] = useState(1);
@@ -33,8 +33,9 @@ const Dashboard = () => {
   const [isProfileActive, setIsProfileActive] = useState(false);
   const {user} = useSelector(state => state.customer);
   const token = user?.accessToken
-  const jobs = useSelector(state => state.customer.jobs);
-  
+  const statusFilter = "new";
+  const tasks = useSelector(state => state.customer.trainingtasks);
+
 
   const resultsPerPage = 10;
   const totalResults = response.length;
@@ -44,7 +45,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    dispatch(getJobs({token}))
+    dispatch(getTrainingTasks({token, statusFilter}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 
@@ -57,6 +58,7 @@ const Dashboard = () => {
           </div>
           <div className="flex flex-col w-full md:space-y-4">
             <Header/>
+           
             <div className="h-screen px-4 pb-24 overflow-auto md:px-6">
               <h1 className="text-2xl font-semibold text-gray-800 ">
                 Overview
@@ -64,19 +66,10 @@ const Dashboard = () => {
 
               <div className="flex flex-col items-center w-full my-6 space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
                 <div className="flex items-center w-full space-x-4">
-                  <div className="w-1/2 ">
-                    <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
-                      <p className="text-xl font-bold text-black ">New</p>
-                      <p className="text-xl font-bold text-black ">12</p>
-                      
-                      <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
-                        <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
-                      </span>
-                    </div>
-                  </div>
+                  
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-orange-100 rounded-md shadow-lg ">
-                      <p className="text-xl font-bold text-black ">Booked</p>
+                      <p className="text-xl font-bold text-black ">In progress</p>
                       <p className="text-xl font-bold text-black ">15</p>
                       
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
@@ -84,6 +77,7 @@ const Dashboard = () => {
                       </span>
                     </div>
                   </div>
+                  
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-green-200 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">Completed</p>
@@ -94,6 +88,9 @@ const Dashboard = () => {
                       </span>
                     </div>
                   </div>
+                  <div className="w-1/2 ">
+                   
+                  </div>
                 </div>
               </div>
 
@@ -103,22 +100,7 @@ const Dashboard = () => {
                 <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" />
                 <h1 className="text-xl font-bold text-gray-800 ">Task List</h1>
               </div>
-              <div className="inline-flex space-x-4 mb-2">
-                <button 
-                // onClick={handleFilter1}
-                 className="flex space-x-2  bg-teal-50 text-teal-400 px-2 rounded-lg py-2">
-                  <HiOutlineArrowDownOnSquare className="w-5 h-5"/>
-                 <p className="">New</p>
-                </button>
-                   
-                <button 
-                // onClick={handleFilter2} 
-                className="flex space-x-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-lg">
-                  <MdLockOutline className="w-5 h-5"/>
-                <p className="">In progress</p>
-                </button>
-                    
-              </div>
+              
 
               </div>
 
@@ -129,43 +111,35 @@ const Dashboard = () => {
                       <TableCell>Job Title</TableCell>
                       <TableCell>Details</TableCell>
                       <TableCell>Industry</TableCell>
-                      <TableCell>Location</TableCell>
-                      <TableCell>Mode</TableCell>
                       <TableCell>Date</TableCell>
-                      <TableCell>Status</TableCell>
+                      {/* <TableCell>Status</TableCell> */}
                     </tr>
                   </TableHeader>
                   <TableBody>
-                    {jobs?.map((user, i) => (
+                    {tasks?.tasks?.map((user, i) => (
                       <TableRow key={i}>
                         <TableCell>
                           <div className="flex items-center text-sm">
                             <div>
-                              <p className="font-semibold">{user.description}</p>
-                              
+                              <p className="font-semibold">{user.task.name}</p>
+                             
                             </div>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user.description}</span>
+                          <span className="text-sm"> {user.task.description}</span>
                         </TableCell>
                         <TableCell>
-                          <Badge type={user.status}>{user.status}</Badge>
-                        </TableCell>
-                        <TableCell>
-                          <span className="text-sm"> {user.location}</span>
-                        </TableCell>
-                        <TableCell>
-                          <span className="text-sm"> {user.mode}</span>
+                        <span className="text-sm"> {user.task.industry}</span>
                         </TableCell>
                         <TableCell>
                           <span className="text-sm">
-                            {new Date(user.createdAT).toLocaleDateString()}
+                            {new Date(user.task.createdAT).toLocaleDateString()}
                           </span>
                         </TableCell>
-                        <TableCell>
+                        {/* <TableCell>
                           <Badge type={user.status}>{user.status}</Badge>
-                        </TableCell>
+                        </TableCell> */}
                       </TableRow>
                     ))}
                   </TableBody>
@@ -187,4 +161,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Newjobs;
