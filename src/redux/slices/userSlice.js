@@ -18,9 +18,11 @@ const initialState = {
     ratingstats : {},
     ratings : {},
     jobs : {},
+    jobsstats:{},
     trainingstats: {},
     trainingtasks: {},
-    trainingtask: {}
+    trainingtask: {},
+    
 
 }
 
@@ -240,6 +242,22 @@ const userSlice = createSlice({
               state.error = ""
       })
       builder.addCase(actions.getJobs.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getJobsStats.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getJobsStats.fulfilled, (state, action)=>{
+              state.loading = false
+              state.jobsstats = action.payload
+              state.message = "Jobs stats fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getJobsStats.rejected, (state, action)=>{
               state.loading=false;
               state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
               state.message = action.error.message

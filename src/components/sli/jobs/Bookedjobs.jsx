@@ -17,26 +17,31 @@ import Sidebar from "@/components/sli/Sidebar";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { BsEnvelopePaper } from "react-icons/bs";
 import { MdLockOutline } from "react-icons/md";
-import { TbPhotoCheck } from "react-icons/tb";
-import { HiOutlineArrowDownOnSquare } from "react-icons/hi2";
-import { BiArrowFromBottom } from "react-icons/bi";
 import Header from '../Header'
+import { useDispatch, useSelector } from 'react-redux';
+import { getJobs } from "@/redux/slices/sliceActions";
 
 
 const Bookedjobs = () => {
+  const dispatch = useDispatch()
   const profileRef = useRef();
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isProfileActive, setIsProfileActive] = useState(false);
+  const {user} = useSelector(state => state.customer);
+  const token = user?.accessToken
+  const jobs = useSelector(state => state.customer.jobs);
+  const statusFilter = "CLAIMED";
 
   const resultsPerPage = 10;
-  const totalResults = response.length;
+  const totalResults = jobs?.metadata?.total;
 
   function onPageChange(p) {
     setPage(p);
   }
 
   useEffect(() => {
+    dispatch(getJobs({token,statusFilter}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 
@@ -110,20 +115,20 @@ const Bookedjobs = () => {
                       <TableCell>Job Title</TableCell>
                       <TableCell>Details</TableCell>
                       <TableCell>Industry</TableCell>
+                      <TableCell>Location</TableCell>
+                      <TableCell>Mode</TableCell>
                       <TableCell>Date</TableCell>
                       <TableCell>Status</TableCell>
                     </tr>
                   </TableHeader>
                   <TableBody>
-                    {data.map((user, i) => (
+                    {jobs?.jobs?.map((user, i) => (
                       <TableRow key={i}>
                         <TableCell>
                           <div className="flex items-center text-sm">
                             <div>
-                              <p className="font-semibold">{user.name}</p>
-                              <p className="text-xs text-gray-600">
-                                {user.job}
-                              </p>
+                              <p className="font-semibold">{user.description}</p>
+                              
                             </div>
                           </div>
                         </TableCell>
@@ -131,11 +136,17 @@ const Bookedjobs = () => {
                           <span className="text-sm"> {user.job}</span>
                         </TableCell>
                         <TableCell>
-                          <Badge type={user.status}>{user.status}</Badge>
+                        <span className="text-sm"> {user.job}</span>
+                        </TableCell>
+                        <TableCell>
+                        <span className="text-sm"> {user.location}</span>
+                        </TableCell>
+                        <TableCell>
+                        <span className="text-sm"> {user.mode}</span>
                         </TableCell>
                         <TableCell>
                           <span className="text-sm">
-                            {new Date(user.date).toLocaleDateString()}
+                            {new Date(user.createdAT).toLocaleDateString()}
                           </span>
                         </TableCell>
                         <TableCell>

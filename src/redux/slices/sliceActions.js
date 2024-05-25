@@ -205,14 +205,30 @@ export const createUserPanel = createAsyncThunk(
 
   export const getJobs = createAsyncThunk(
     'sli/jobs/fetch',
-    async ({ token }) => {
-      
+    async ({ token, statusFilter }) => {
+      const statuss = statusFilter || ""
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
-      const response = await axios.get(`${baseUrl}/api/v1/jobs`, {
+      const response = await axios.get(`${baseUrl}/api/v1/si/slijobs?status=${statuss}`, {
+        ...config,
+        withCredentials: true,
+      })
+      return response.data
+    },
+  )
+
+  export const getJobsStats = createAsyncThunk(
+    'sli/jobs/stats/fetch',
+    async ({ token}) => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.get(`${baseUrl}/api/v1/si/slijobs/stats`, {
         ...config,
         withCredentials: true,
       })
