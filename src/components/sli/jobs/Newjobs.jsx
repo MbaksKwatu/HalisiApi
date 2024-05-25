@@ -22,7 +22,7 @@ import { HiOutlineArrowDownOnSquare } from "react-icons/hi2";
 import { BiArrowFromBottom } from "react-icons/bi";
 import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux';
-import { getJobs } from "@/redux/slices/sliceActions";
+import { getJobs,getJobsStats } from "@/redux/slices/sliceActions";
 
 
 const Newjobs = () => {
@@ -35,6 +35,7 @@ const Newjobs = () => {
   const token = user?.accessToken
   const jobs = useSelector(state => state.customer.jobs);
   const statusFilter = "new";
+  const stats = useSelector(state => state.customer.jobsstats);
 
   const resultsPerPage = 10;
   const totalResults = jobs?.metadata?.total;
@@ -45,6 +46,7 @@ const Newjobs = () => {
 
   useEffect(() => {
     dispatch(getJobs({token,statusFilter}))
+    dispatch(getJobsStats({token}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 
@@ -80,7 +82,7 @@ const Newjobs = () => {
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-green-200 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">Completed</p>
-                      <p className="text-xl font-bold text-black ">15</p>
+                      <p className="text-xl font-bold text-black ">{stats?.completedJobs}</p>
                       
                       <span className="absolute hidden lg:flex  p-4 border border-teal-500 rounded-md top-2 right-4">
                         <TbPhotoCheck className="text-teal-500 h5 w-5" />

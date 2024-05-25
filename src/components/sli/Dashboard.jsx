@@ -35,6 +35,17 @@ const Dashboard = () => {
   const jobs = useSelector(state => state.customer.jobs);
   const stats = useSelector(state => state.customer.jobsstats);
 
+  const [statusFilter, setStatusFilter] = useState([])
+
+  const handleNewFilter = () => {
+    setStatusFilter('new')
+  }
+  const handleInProgress = () => {
+    setStatusFilter('claimed')
+  }
+
+
+
   const resultsPerPage = 10;
   const totalResults = jobs?.metadata?.total;
 
@@ -43,10 +54,10 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    dispatch(getJobs({token}))
+    dispatch(getJobs({token,statusFilter}))
     dispatch(getJobsStats({token}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
-  }, [page]);
+  }, [page,statusFilter]);
 
   return (
     <>
@@ -105,14 +116,14 @@ const Dashboard = () => {
               </div>
               <div className="inline-flex space-x-4 mb-2">
                 <button 
-                // onClick={handleFilter1}
+                onClick={handleNewFilter}
                  className="flex space-x-2  bg-teal-50 text-teal-400 px-2 rounded-lg py-2">
                   <HiOutlineArrowDownOnSquare className="w-5 h-5"/>
                  <p className="">New</p>
                 </button>
                    
                 <button 
-                // onClick={handleFilter2} 
+                onClick={handleInProgress} 
                 className="flex space-x-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-lg">
                   <MdLockOutline className="w-5 h-5"/>
                 <p className="">In progress</p>
@@ -164,7 +175,7 @@ const Dashboard = () => {
                           </span>
                         </TableCell>
                         <TableCell>
-                          <Badge type={user.status}>{user.status}</Badge>
+                          <Badge type={user.status == 'COMPLETED' ? 'success': 'primary'}>{user.status}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}
