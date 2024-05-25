@@ -19,7 +19,7 @@ import { BsEnvelopePaper } from "react-icons/bs";
 import { MdLockOutline } from "react-icons/md";
 import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux';
-import { getTrainingTasks } from "@/redux/slices/sliceActions";
+import { getTrainingTasks ,getTrainingStats} from "@/redux/slices/sliceActions";
 
 
 const Bookedjobs = () => {
@@ -32,6 +32,7 @@ const Bookedjobs = () => {
   const token = user?.accessToken
   const statusFilter = "completed";
   const tasks = useSelector(state => state.customer.trainingtasks);
+  const stats = useSelector(state => state.customer.trainingstats);
 
   const resultsPerPage = 10;
   const totalResults = tasks?.metadata?.total;
@@ -42,6 +43,7 @@ const Bookedjobs = () => {
 
   useEffect(() => {
     dispatch(getTrainingTasks({token, statusFilter}))
+    dispatch(getTrainingStats({token}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 
@@ -64,7 +66,7 @@ const Bookedjobs = () => {
                   <div className="w-1/2 ">
                     <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">New</p>
-                      <p className="text-xl font-bold text-black ">12</p>
+                      <p className="text-xl font-bold text-black ">{stats?.new}</p>
                       {/* <p className="text-sm text-gray-400">
                         View all Upcoming Submissions
                       </p> */}
@@ -76,7 +78,7 @@ const Bookedjobs = () => {
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-green-100 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">Completed</p>
-                      <p className="text-xl font-bold text-black ">15</p>
+                      <p className="text-xl font-bold text-black ">{stats?.completed}</p>
                       {/* <p className="text-sm text-gray-400">
                         View all Booked Jobs
                       </p> */}
