@@ -22,7 +22,7 @@ import { HiOutlineArrowDownOnSquare } from "react-icons/hi2";
 import { BiArrowFromBottom } from "react-icons/bi";
 import Header from './Header'
 import { useDispatch, useSelector } from 'react-redux';
-import { getJobs } from "@/redux/slices/sliceActions";
+import { getJobs, getJobsStats } from "@/redux/slices/sliceActions";
 
 
 const Dashboard = () => {
@@ -30,14 +30,13 @@ const Dashboard = () => {
   const profileRef = useRef();
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
-  const [isProfileActive, setIsProfileActive] = useState(false);
   const {user} = useSelector(state => state.customer);
   const token = user?.accessToken
   const jobs = useSelector(state => state.customer.jobs);
-  
+  const stats = useSelector(state => state.customer.jobsstats);
 
   const resultsPerPage = 10;
-  const totalResults = response.length;
+  const totalResults = jobs?.metadata?.total;
 
   function onPageChange(p) {
     setPage(p);
@@ -45,6 +44,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getJobs({token}))
+    dispatch(getJobsStats({token}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 
@@ -67,7 +67,7 @@ const Dashboard = () => {
                   <div className="w-1/2 ">
                     <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">New</p>
-                      <p className="text-xl font-bold text-black ">12</p>
+                      <p className="text-xl font-bold text-black ">{stats?.new}</p>
                       
                       <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
                         <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
@@ -77,7 +77,7 @@ const Dashboard = () => {
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-orange-100 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">Booked</p>
-                      <p className="text-xl font-bold text-black ">15</p>
+                      <p className="text-xl font-bold text-black ">{stats?.booked}</p>
                       
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
                         <MdLockOutline className="text-purple-500 h5 w-5" />
@@ -87,7 +87,7 @@ const Dashboard = () => {
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-green-200 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">Completed</p>
-                      <p className="text-xl font-bold text-black ">15</p>
+                      <p className="text-xl font-bold text-black ">{stats?.completedJobs}</p>
                       
                       <span className="absolute hidden lg:flex  p-4 border border-teal-500 rounded-md top-2 right-4">
                         <TbPhotoCheck className="text-teal-500 h5 w-5" />
@@ -136,7 +136,7 @@ const Dashboard = () => {
                     </tr>
                   </TableHeader>
                   <TableBody>
-                    {jobs?.map((user, i) => (
+                    {jobs?.jobs?.map((user, i) => (
                       <TableRow key={i}>
                         <TableCell>
                           <div className="flex items-center text-sm">
