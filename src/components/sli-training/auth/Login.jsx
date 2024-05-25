@@ -4,7 +4,7 @@ import SnackBar from '@/components/shared/SnackBar'
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '@/redux/slices/sliceActions';
-import { ClipLoader, BarLoader } from 'react-spinners';
+import { BarLoader } from 'react-spinners';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const Login = () => {
   useEffect(() => {
     if(customer?.loading === false && customer.message === 'login successful'){
         setshow({open:true, text: 'Login was successful', mood: 'success'})
-       router.push('/sli/dashboard')
+       router.push('/sli/training/dashboard')
       }
 }, [customer]);
 
