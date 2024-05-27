@@ -161,7 +161,7 @@ const Sliprofiles = () => {
                         <span className="text-sm"> {user?.levelOfEducation}</span>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user.county}</span>
+                          <span className="text-sm capitalize"> {user.county}</span>
                         </TableCell>
                         <TableCell>
                           <span className="text-sm"> {user.gender}</span>
