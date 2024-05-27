@@ -69,8 +69,8 @@ const Sliprofiles = () => {
             <Header/>
             
             <div className="h-screen px-4 pb-24 overflow-auto md:px-6">
-              <h1 className="text-2xl font-semibold text-gray-800 ">
-                Overview
+              <h1 className="text-xl font-semibold text-gray-800 ">
+                SLI Profiles
               </h1>
 
               <div className="flex flex-col items-center w-full my-6 space-y-4 md:space-x-4 md:space-y-0 md:flex-row">

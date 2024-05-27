@@ -24,9 +24,11 @@ import Header from './Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobs, getTrainingStats,getTrainingTasks } from "@/redux/slices/sliceActions";
 import Link from "next/link";
+import useAuth from '@/hooks/useAuth'
 
 
 const Dashboard = () => {
+  useAuth();
   const dispatch = useDispatch()
   const profileRef = useRef();
   const [page, setPage] = useState(1);

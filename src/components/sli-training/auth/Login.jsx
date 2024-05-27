@@ -27,16 +27,19 @@ const Login = () => {
       "password":password.current.value
     }
     dispatch(loginUser(details))
+    .unwrap()
+    .then((res)=>{
+      setshow({open:true, text: 'Login was successful', mood: 'success'})
+      router.push('/sli/training/dashboard') 
+    })
+    .catch((error)=>{
+      setshow({open:true, text: 'Failed to login, please try again', mood: 'error'})
+      console.error('Failed to login',error)
+    })
   
   
   }
 
-  useEffect(() => {
-    if(customer?.loading === false && customer.message === 'login successful'){
-        setshow({open:true, text: 'Login was successful', mood: 'success'})
-       router.push('/sli/training/dashboard')
-      }
-}, [customer]);
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-6">

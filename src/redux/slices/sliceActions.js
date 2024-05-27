@@ -45,32 +45,32 @@ export const createUserPanel = createAsyncThunk(
   )
 
 
-  // export const loginUser = createAsyncThunk(
-  //   'user/loginUser',
-  //   async (details) => {
-        
-  //     return axios
-  //       .post(
-  //         `${baseUrl}/api/v1/auth/login`,
-  //         { ...details },
-  //         { withCredentials: false },
-  //       )
-  //       .then((res) => res.data)
-  //   },
-  // ) 
-  
   export const loginUser = createAsyncThunk(
     'user/loginUser',
     async (details) => {
- 
-      const response = await axios.post(`${baseUrl}/api/v1/auth/login`, {
-        ...details ,
-        withCredentials: true,
-      })
-      return response.data
-      
+        
+      return axios
+        .post(
+          `${baseUrl}/api/v1/auth/login`,
+          { ...details },
+          { withCredentials: false },
+        )
+        .then((res) => res.data)
     },
-  )
+  ) 
+  
+  // export const loginUser = createAsyncThunk(
+  //   'user/loginUser',
+  //   async (details) => {
+ 
+  //     const response = await axios.post(`${baseUrl}/api/v1/auth/login`, {
+  //       ...details ,
+  //       withCredentials: true,
+  //     })
+  //     return response.data
+      
+  //   },
+  // )
 
   export const logout = createAsyncThunk(
     'user/logout',

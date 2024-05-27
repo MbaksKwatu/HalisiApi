@@ -23,9 +23,11 @@ import { BiArrowFromBottom } from "react-icons/bi";
 import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getTrainingTasks,getTrainingStats } from "@/redux/slices/sliceActions";
+import useAuth from '@/hooks/useAuth'
 
 
 const Newjobs = () => {
+  useAuth();
   const dispatch = useDispatch()
   const profileRef = useRef();
   const [page, setPage] = useState(1);
@@ -63,7 +65,7 @@ const Newjobs = () => {
            
             <div className="h-screen px-4 pb-24 overflow-auto md:px-6">
               <h1 className="text-2xl font-semibold text-gray-800 ">
-                Overview
+                New Tasks
               </h1>
 
               <div className="flex flex-col items-center w-full my-6 space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
