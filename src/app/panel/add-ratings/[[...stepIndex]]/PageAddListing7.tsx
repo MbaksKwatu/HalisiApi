@@ -25,10 +25,13 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
           </div>
            </Link>
          
-          <div className="px-4 py-6 space-y-3 text-center bg-orange-100 rounded-lg">
+         <Link href={'/panel/sli-profiles'}>
+         <div className="px-4 py-6 space-y-3 text-center bg-orange-100 rounded-lg">
             <div className="flex justify-center"><FaRegStarHalfStroke className="w-6 h-6" /></div>
-            <p>Continue <br /> Rating </p>
+            <p>Return to <br /> SLI Profiles </p>
           </div>
+         </Link>
+          
         </div>
         
 

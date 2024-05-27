@@ -98,9 +98,9 @@ const SliProfileDetail = ({params}) => {
                     </div>
                     <div className="border p-4 rounded-lg">
                       <p className="text-gray-500">Certificate</p>
-                      <p className="text-lg font-semibold text-blue-500 hover:underline">
+                      <a href={sli?.cv} className="text-lg font-semibold text-blue-500 hover:underline">
                         {sli?.cv ? sli?.cv : 'Not Available'}
-                      </p>
+                      </a>
                     </div>
                   </div>
                 </div>

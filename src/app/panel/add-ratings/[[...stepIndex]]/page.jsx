@@ -11,6 +11,7 @@ import PageAddListing7 from "./PageAddListing7";
 import { useSearchParams } from "next/navigation";
 import { ClipLoader, BarLoader } from 'react-spinners';
 import SnackBar from '@/components/shared/SnackBar'
+import { useRouter } from 'next/navigation'
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +31,7 @@ const PageContent = ({params}) => {
   const searchParams = useSearchParams()
   const sliId = searchParams.get('id')
   const dispatch = useDispatch();
+  const router = useRouter();
   const [questions, setQuestions] = useState([]);
   // const [loading, setLoading] = useState(true);
 
@@ -83,7 +85,7 @@ const PageContent = ({params}) => {
     <div>
       <ContentComponent questions={questionSet}  />
       {stepIndex === 6 && (
-      <button onClick={() => handleSubmit(ratings,sliId,customer,dispatch)} className="mt-3 bg-cyan-400 px-4 py-2 rounded-lg">
+      <button onClick={() => handleSubmit(ratings,sliId,customer,dispatch,setshow,router)} className="mt-3 bg-cyan-400 px-4 py-2 rounded-lg">
         {loading?  ( <> <ClipLoader color='white' size={20}  /> Please wait </>) : "Submit Ratings"}
         </button>
     )}
@@ -93,7 +95,7 @@ const PageContent = ({params}) => {
  
 };
 
-const handleSubmit = async (ratings,sliId,customer,dispatch) => {
+const handleSubmit = async (ratings,sliId,customer,dispatch,setshow,router) => {
   const ratingsArray = Object.keys(ratings).map((key) => {
     const rating = ratings[key];
     return {
@@ -118,6 +120,15 @@ const handleSubmit = async (ratings,sliId,customer,dispatch) => {
  
  
   dispatch(createRatings(details))
+  .unwrap()
+  .then((res)=>{
+    setshow({open:true, text: 'SLI rated successfully', mood: 'success'})
+    router.push('/panel/add-ratings/7') 
+  })
+  .catch((error)=>{
+    setshow({open:true, text: 'Failed, please try again!', mood: 'error'})
+    console.error(error)
+  })
 };
 
 const Page = ({ params }) => (

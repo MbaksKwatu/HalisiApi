@@ -34,7 +34,7 @@ const CommonLayout = ({ children, params }) => {
 
         <div className="listingSection__wrap">{children}</div>
 
-        {index !== 7 && ( 
+        {index !== 7 && index !== 6 && ( 
           <div className="flex justify-end space-x-5">
             <ButtonSecondary onClick={handleBack}>Go back</ButtonSecondary>
             <ButtonPrimary onClick={handleNext}>{nextBtnText || 'Continue'}</ButtonPrimary>
