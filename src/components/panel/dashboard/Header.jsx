@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@/redux/slices/userSlice';
 import SnackBar from '@/components/shared/SnackBar'
+import { IoMdContact } from "react-icons/io";
 
 const Header = () => {
     const profileRef = useRef();
@@ -48,13 +49,14 @@ const Header = () => {
                     Logout
                   </button>
                   <span className="w-1 h-8 bg-gray-200 rounded-lg"></span>
-                  <a href="#" className="relative block">
+                  <IoMdContact className="w-10 h-10 text-yellow-500"/>
+                  {/* <a href="#" className="relative block">
                     <img
                       alt="profil"
                       src="https://plus.unsplash.com/premium_photo-1664303232497-69fd12425fe1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D"
                       className="mx-auto object-cover rounded-full h-10 w-10 "
                     />
-                  </a>
+                  </a> */}
                   <button
                     ref={profileRef}
                     className="flex items-center text-gray-500  text-md"

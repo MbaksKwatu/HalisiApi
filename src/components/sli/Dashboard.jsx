@@ -23,9 +23,11 @@ import { BiArrowFromBottom } from "react-icons/bi";
 import Header from './Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobs, getJobsStats } from "@/redux/slices/sliceActions";
+import useAuth from '@/hooks/useAuth'
 
 
 const Dashboard = () => {
+  useAuth();
   const dispatch = useDispatch()
   const profileRef = useRef();
   const [page, setPage] = useState(1);
@@ -112,7 +114,7 @@ const Dashboard = () => {
               <div className="flex justify-between">
               <div className="inline-flex space-x-2">
                 <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" />
-                <h1 className="text-xl font-bold text-gray-800 ">Task List</h1>
+                <h1 className="text-xl font-bold text-gray-800 ">Jobs List</h1>
               </div>
               <div className="inline-flex space-x-4 mb-2">
                 <button 

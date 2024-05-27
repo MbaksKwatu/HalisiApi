@@ -1,12 +1,28 @@
 'use client'
 import React, {useRef, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { IoMdContact } from "react-icons/io";
+import { logout } from '@/redux/slices/userSlice';
+import SnackBar from '@/components/shared/SnackBar'
 
 const Header = () => {
+  
     const profileRef = useRef();
     const dispatch = useDispatch();
     const [isProfileActive, setIsProfileActive] = useState(false);
     const {user} = useSelector(state => state.customer);
+
+    const [show, setshow] = useState({
+      open:false,
+      text: '',
+      mood: 'error'
+    })
+
+    const handleLogout = () => {
+      dispatch(logout())
+      setshow({open:true, text: 'Logout was successful', mood: 'info'})
+    };
+
   return (
     <header className="z-40 flex items-center justify-between w-full h-16">
               <div className="block ml-6 lg:hidden">
@@ -25,17 +41,18 @@ const Header = () => {
               </div>
               <div className="relative z-20 flex flex-col justify-end h-full px-3 md:w-full">
                 <div className="relative flex items-center justify-end w-full p-1 space-x-4">
-                  <button className="flex items-center p-2 text-gray-800 bg-yellow-500 rounded-md shadow hover:text-gray-700 text-md">
+                  <button onClick={handleLogout} className="flex items-center p-2 text-gray-800 bg-yellow-500 rounded-md shadow hover:text-gray-700 text-md">
                     Logout
                   </button>
                   <span className="w-1 h-8 bg-gray-200 rounded-lg"></span>
-                  <a href="#" className="relative block">
+                  <IoMdContact className="w-10 h-10 text-yellow-500"/>
+                  {/* <a href="#" className="relative block">
                     <img
                       alt="profil"
                       src="https://plus.unsplash.com/premium_photo-1664303232497-69fd12425fe1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D"
                       className="mx-auto object-cover rounded-full h-10 w-10 "
                     />
-                  </a>
+                  </a> */}
                   <button
                     ref={profileRef}
                     className="flex items-center text-gray-500  text-md"
@@ -56,9 +73,9 @@ const Header = () => {
                   {isProfileActive ? (
                     <div className="absolute z-10 top-12 right-0 w-64 rounded-lg bg-white shadow-md border text-sm text-gray-600">
                       <div className="p-2 text-left">
-                        <span className="block text-gray-500/80 p-2">
+                        {/* <span className="block text-gray-500/80 p-2">
                           {"user@gmail.com"}
-                        </span>
+                        </span> */}
                         <a
                           href="/sli/profile"
                           className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150"
@@ -66,9 +83,9 @@ const Header = () => {
                           Profile
                         </a>
 
-                        <button className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150">
+                        {/* <button className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150">
                           Logout
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   ) : (

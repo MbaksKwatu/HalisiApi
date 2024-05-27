@@ -4,6 +4,8 @@ import { MdLockOutline } from "react-icons/md";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { MdOutlineDashboard } from "react-icons/md";
 import {  usePathname } from "next/navigation";
+import Image from "next/image";
+import HalisiIcon from '@/images/Platform Feedback icon.png'
 
 const Menu = (props) => {
     const { children, items } = props
@@ -112,10 +114,10 @@ const Sidebar = () => {
                 className="fixed top-0 left-0 w-full h-full border-r bg-white space-y-8 sm:w-64">
                 <div class="flex flex-col h-full px-4">
                     <div className='h-20 flex items-center pl-2'>
-                        <div className="w-full flex items-center gap-x-4">
-                            
+                        <div className="w-full flex items-center gap-x-2">
+                         <Image src={HalisiIcon} className="w-10 h-10" />
                             <div>
-                                <span className="block text-gray-700 text-lg font-extrabold ">Hali Halisi</span>
+                                <span className="block text-gray-700 text-2xl font-extrabold ">Hali Halisi</span>
                                
                             </div>
                             

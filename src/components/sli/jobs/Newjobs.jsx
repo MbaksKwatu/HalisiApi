@@ -15,22 +15,19 @@ import {
 } from "@windmill/react-ui";
 import Sidebar from "@/components/sli/Sidebar";
 import { LuFileSpreadsheet } from "react-icons/lu";
-import { BsEnvelopePaper } from "react-icons/bs";
 import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
-import { HiOutlineArrowDownOnSquare } from "react-icons/hi2";
-import { BiArrowFromBottom } from "react-icons/bi";
 import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobs,getJobsStats } from "@/redux/slices/sliceActions";
-
+import useAuth from '@/hooks/useAuth'
 
 const Newjobs = () => {
+  useAuth();
   const dispatch = useDispatch()
   const profileRef = useRef();
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
-  const [isProfileActive, setIsProfileActive] = useState(false);
   const {user} = useSelector(state => state.customer);
   const token = user?.accessToken
   const jobs = useSelector(state => state.customer.jobs);
@@ -62,7 +59,7 @@ const Newjobs = () => {
            
             <div className="h-screen px-4 pb-24 overflow-auto md:px-6">
               <h1 className="text-2xl font-semibold text-gray-800 ">
-                Overview
+                New Jobs
               </h1>
 
               <div className="flex flex-col items-center w-full my-6 space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
@@ -106,7 +103,7 @@ const Newjobs = () => {
               <div className="flex justify-between">
               <div className="inline-flex space-x-2">
                 <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" />
-                <h1 className="text-xl font-bold text-gray-800 ">Task List</h1>
+                <h1 className="text-xl font-bold text-gray-800 ">Jobs List</h1>
               </div>
               
 
