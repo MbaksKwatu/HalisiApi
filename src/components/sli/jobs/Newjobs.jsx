@@ -21,6 +21,7 @@ import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobs,getJobsStats } from "@/redux/slices/sliceActions";
 import useAuth from '@/hooks/useAuth'
+import Link from "next/link";
 
 const Newjobs = () => {
   useAuth();
@@ -68,7 +69,7 @@ const Newjobs = () => {
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-orange-100 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">In progress</p>
-                      <p className="text-xl font-bold text-black ">15</p>
+                      <p className="text-xl font-bold text-black ">{stats?.booked}</p>
                       
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
                         <MdLockOutline className="text-purple-500 h5 w-5" />
@@ -87,14 +88,7 @@ const Newjobs = () => {
                     </div>
                   </div>
                   <div className="w-1/2 ">
-                    {/* <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
-                      <p className="text-xl font-bold text-black ">New</p>
-                      <p className="text-xl font-bold text-black ">12</p>
-                      
-                      <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
-                        <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
-                      </span>
-                    </div> */}
+                    
                   </div>
                 </div>
               </div>
@@ -127,10 +121,11 @@ const Newjobs = () => {
                       <TableRow key={i}>
                         <TableCell>
                           <div className="flex items-center text-sm">
-                            <div>
+                          <div className="flex hover:underline decoration-orange-500 items-center text-sm">
+                            <Link href={`/sli/jobs/${user.ID}`}>
                               <p className="font-semibold">{user.description}</p>
-                              
-                            </div>
+                            </Link>
+                          </div>
                           </div>
                         </TableCell>
                         <TableCell>

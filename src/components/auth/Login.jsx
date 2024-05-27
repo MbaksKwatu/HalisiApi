@@ -29,8 +29,14 @@ const Login = () => {
     dispatch(loginUser(details))
     .unwrap()
     .then((res)=>{
-      setshow({open:true, text: 'Login was successful', mood: 'success'})
-      router.push('/sli/dashboard') 
+      if(res.userGroup == 'SIGN INTERPRETER'){
+        setshow({open:true, text: 'Login was successful', mood: 'success'})
+        router.push('/sli/dashboard') 
+      }else {
+        setshow({open:true, text: 'That page is restricted', mood: 'error'}) 
+      }
+      
+      
     })
     .catch((error)=>{
       setshow({open:true, text: 'Failed to login, please try again', mood: 'error'})

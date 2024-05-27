@@ -102,11 +102,11 @@ export const createUserPanel = createAsyncThunk(
 
   export const getSLIs = createAsyncThunk(
     'council/slis/fetch',
-    async (statusFilter) => {
+    async ({page,statusFilter}) => {
       const statuss = statusFilter || ""
       return axios
         .get(
-          `${baseUrl}/api/v1/council/slis?status=${statuss}`,
+          `${baseUrl}/api/v1/council/slis?status=${statuss}&limit=10&page=${page}`,
           { withCredentials: false },
         )
         .then((res) => res.data)
@@ -193,10 +193,10 @@ export const createUserPanel = createAsyncThunk(
 
   export const getSLIRatings = createAsyncThunk(
     'panel/sliratings/fetch',
-    async () => {
+    async ({page}) => {
       return axios
         .get(
-          `${baseUrl}/api/v1/council/ratings`,
+          `${baseUrl}/api/v1/council/ratings?limit=10&page=${page}`,
           { withCredentials: false },
         )
         .then((res) => res.data)
@@ -213,6 +213,22 @@ export const createUserPanel = createAsyncThunk(
         },
       }
       const response = await axios.get(`${baseUrl}/api/v1/si/slijobs?status=${statuss}`, {
+        ...config,
+        withCredentials: true,
+      })
+      return response.data
+    },
+  )
+
+  export const getJob = createAsyncThunk(
+    'sli/job/fetch',
+    async ({ id, token }) => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const response = await axios.get(`${baseUrl}/api/v1/si/slijobs/${id}`, {
         ...config,
         withCredentials: true,
       })
