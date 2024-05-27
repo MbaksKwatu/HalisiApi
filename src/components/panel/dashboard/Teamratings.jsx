@@ -40,7 +40,7 @@ const TeamRatings = () => {
 
   useEffect(() => {
     dispatch(getSLIRatingStats())
-    dispatch(getSLIRatings())
+    dispatch(getSLIRatings({page}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 

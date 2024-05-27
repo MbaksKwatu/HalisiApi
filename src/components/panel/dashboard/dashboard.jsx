@@ -19,11 +19,9 @@ import { LuFileSpreadsheet } from "react-icons/lu";
 import { BsEnvelopePaper } from "react-icons/bs";
 import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getSLIs, getDashboardStats } from "@/redux/slices/sliceActions";
-
- import useAuth from '@/hooks/useAuth'
+import useAuth from '@/hooks/useAuth'
 
 
 
@@ -48,7 +46,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
-    dispatch(getSLIs())
+    dispatch(getSLIs({page}))
     dispatch(getDashboardStats())
   }, [page]);
 
@@ -141,7 +139,7 @@ const Dashboard = () => {
                         <span className="text-sm"> {user?.levelOfEducation}</span>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user?.county}</span>
+                          <span className="text-sm capitalize"> {user?.county}</span>
                         </TableCell>
                         <TableCell>
                           <Badge type={user?.status}>{user.gender}</Badge>

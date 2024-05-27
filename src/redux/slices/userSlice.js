@@ -247,6 +247,22 @@ const userSlice = createSlice({
               state.message = action.error.message
       })
 
+      builder.addCase(actions.getJob.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getJob.fulfilled, (state, action)=>{
+              state.loading = false
+              state.job = action.payload
+              state.message = "Job fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getJob.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
       builder.addCase(actions.getJobsStats.pending, (state)=>{
         state.loading = true;
       })

@@ -21,6 +21,7 @@ import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobs,getJobsStats } from "@/redux/slices/sliceActions";
 import useAuth from '@/hooks/useAuth'
+import Link from "next/link";
 
 const Bookedjobs = () => {
   useAuth();
@@ -89,14 +90,7 @@ const Bookedjobs = () => {
                     </div>
                   </div>
                   <div className="w-1/2">
-                    {/* <div className="relative w-full px-4 py-6 bg-green-200 rounded-md shadow-lg ">
-                      <p className="text-xl font-bold text-black ">Completed</p>
-                      <p className="text-xl font-bold text-black ">15</p>
-                      
-                      <span className="absolute hidden lg:flex  p-4 border border-teal-500 rounded-md top-2 right-4">
-                        <TbPhotoCheck className="text-teal-500 h5 w-5" />
-                      </span>
-                    </div> */}
+                    
                   </div>
                 </div>
               </div>
@@ -129,10 +123,11 @@ const Bookedjobs = () => {
                       <TableRow key={i}>
                         <TableCell>
                           <div className="flex items-center text-sm">
-                            <div>
+                          <div className="flex hover:underline decoration-orange-500 items-center text-sm">
+                            <Link href={`/sli/jobs/${user.ID}`}>
                               <p className="font-semibold">{user.description}</p>
-                              
-                            </div>
+                            </Link>
+                          </div>
                           </div>
                         </TableCell>
                         <TableCell>

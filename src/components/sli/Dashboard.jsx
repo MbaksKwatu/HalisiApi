@@ -24,6 +24,7 @@ import Header from './Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobs, getJobsStats } from "@/redux/slices/sliceActions";
 import useAuth from '@/hooks/useAuth'
+import Link from "next/link";
 
 
 const Dashboard = () => {
@@ -152,11 +153,10 @@ const Dashboard = () => {
                     {jobs?.jobs?.map((user, i) => (
                       <TableRow key={i}>
                         <TableCell>
-                          <div className="flex items-center text-sm">
-                            <div>
+                          <div className="flex hover:underline decoration-orange-500 items-center text-sm">
+                            <Link href={`/sli/jobs/${user.ID}`}>
                               <p className="font-semibold">{user.description}</p>
-                              
-                            </div>
+                            </Link>
                           </div>
                         </TableCell>
                         <TableCell>

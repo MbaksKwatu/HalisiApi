@@ -29,8 +29,13 @@ const Login = () => {
     dispatch(loginUser(details))
     .unwrap()
     .then((res)=>{
+      if(res.userGroup == 'SI_TRAINING'){
+        router.push('/sli/training/dashboard') 
+      }else {
+        setshow({open:true, text: 'That page is restricted', mood: 'error'}) 
+      }
       setshow({open:true, text: 'Login was successful', mood: 'success'})
-      router.push('/sli/training/dashboard') 
+      
     })
     .catch((error)=>{
       setshow({open:true, text: 'Failed to login, please try again', mood: 'error'})

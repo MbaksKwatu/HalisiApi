@@ -31,7 +31,12 @@ const Login = () => {
     .unwrap()
     .then((res)=>{
       setshow({open:true, text: 'Login was successful', mood: 'success'})
-      router.push('/panel/dashboard') 
+      console.log(res)
+      if(res.userGroup == 'COUNCIL_MEMBER'){
+        router.push('/panel/dashboard') 
+      }else {
+        setshow({open:true, text: 'That page is restricted', mood: 'error'}) 
+      }
     })
     .catch((error)=>{
       setshow({open:true, text: 'Failed to login, please try again', mood: 'error'})
