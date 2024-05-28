@@ -22,7 +22,7 @@ const SliProfileDetail = ({params}) => {
     const comment  = useRef(null)
 
     const handleSubmit = () => {
-      details = {
+     const  details = {
         "slid" : id,
         "comment" : comment.current.value
       }
