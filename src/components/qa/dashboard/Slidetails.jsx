@@ -46,7 +46,7 @@ const SliProfileDetail = ({params}) => {
             <div className="h-screen px-4 pb-24 overflow-auto md:px-6">
             <div className="container mx-auto p-6">
               <div className="bg-white shadow rounded-lg p-6">
-                {/* Header Section */}
+               
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <h1 className="text-2xl font-semibold text-gray-700">{sli?.name}</h1>
@@ -64,19 +64,19 @@ const SliProfileDetail = ({params}) => {
                   </div>
                 </div>
                 
-                {/* Score and Rating Section */}
+               
                 <div className="flex space-x-8 mb-8">
                   <div className="flex-1 bg-yellow-50 p-4 rounded-lg shadow-sm">
-                    <p className="text-gray-500">Panel Score</p>
+                    <p className="text-orange-500">Panel Score</p>
                     <p className="text-2xl font-semibold text-gray-700">{sli?.panelScore}%</p>
                   </div>
                   <div className="flex-1 bg-yellow-50 p-4 rounded-lg shadow-sm">
-                    <p className="text-gray-500">Panel Rating</p>
+                    <p className="text-orange-500">Panel Rating</p>
                     <p className="text-xl font-semibold ">{ sli?.status == 'ACCEPTED' ? 'Passed' : sli?.status == 'REJECTED' ? 'Rejected' : 'Training'}</p>
                   </div>
                 </div>
 
-                {/* Evaluation Notes Section */}
+               
                 <div>
                   <div className="border-b-2 border-yellow-500 pb-2 mb-4">
                     <h2 className="text-xl font-semibold text-gray-700">Evaluation Notes</h2>
