@@ -1,11 +1,11 @@
 import React, {Fragment} from "react";
 import Signup from "@/components/panel/auth/Signup";
-import Image from "next/image";
+import Login from "@/components/panel/auth/Login";
 
 export default function Home() {
   return (
    <Fragment>
-     <Signup/>
+     <Login/>
    </Fragment>
   );
 }

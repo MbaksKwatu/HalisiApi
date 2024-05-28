@@ -104,30 +104,13 @@ const TeamRatings = () => {
                     </div>
                   </div>
                   <div className="w-1/2 ">
-                    {/* <div className="relative w-full px-4 py-6 bg-cyan-50 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-gray-500 ">Maximum SLI Score </p>
-                      <p className="text-xl font-bold text-cyan-300 ">{stats?.maximumSliScore} / 100</p>
-                     
-                      <span className="absolute hidden lg:flex  rounded-md top-2 right-4">
-                      <div class="relative size-20 text-cyan-400 ">
-                        <svg class="size-full" width="38" height="38" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                         
-                          <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-gray-200 " stroke-width="2"></circle>
-                         
-                          <g class="origin-center -rotate-90 transform">
-                            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-cyan-400  " stroke-width="2" stroke-dasharray="100" stroke-dashoffset={100 - stats?.maximumSliScore}></circle>
-                          </g>
-                        </svg>
-                      </div>
-                       
-                      </span>
-                    </div> */}
+                    
                   </div>
                 </div>
               </div>
 
               <div className="flex space-x-2">
-                {/* <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" /> */}
+              
                 <h1 className="text-xl font-bold text-gray-800 ">Rated Profiles</h1>
               </div>
 
@@ -158,7 +141,7 @@ const TeamRatings = () => {
                         
                         <TableCell>
                           <Badge type={user?.status == 'ACCEPTED' ? 'success' : user?.status == 'ACCEPTED_TRAINING' ? 'neutral' : 'warning' }>
-                            {user?.status}
+                            {user?.status == 'ACCEPTED_TRAINING' ? 'TRAINING' : user?.status}
                             </Badge>
                         </TableCell>
                       </TableRow>

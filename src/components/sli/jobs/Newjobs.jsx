@@ -109,7 +109,7 @@ const Newjobs = () => {
                     <tr>
                       <TableCell>Job Title</TableCell>
                       <TableCell>Details</TableCell>
-                      <TableCell>Industry</TableCell>
+                      {/* <TableCell>Industry</TableCell> */}
                       <TableCell>Location</TableCell>
                       <TableCell>Mode</TableCell>
                       <TableCell>Date</TableCell>
@@ -131,9 +131,9 @@ const Newjobs = () => {
                         <TableCell>
                           <span className="text-sm"> {user.job}</span>
                         </TableCell>
-                        <TableCell>
+                        {/* <TableCell>
                         <span className="text-sm"> {user.job}</span>
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell>
                         <span className="text-sm"> {user.location}</span>
                         </TableCell>

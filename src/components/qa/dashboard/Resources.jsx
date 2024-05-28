@@ -43,7 +43,9 @@ const Resources = () => {
               <br />
               <br />
               80% above: Onboarded onto the Hali Halisi digital platform
+              <br />
               60% - 80%: Interpreter training program
+              <br />
               60% below: Referred to a Kenyan sign language course
               </p>
 

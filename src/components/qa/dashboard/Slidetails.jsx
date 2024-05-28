@@ -32,7 +32,7 @@ const SliProfileDetail = ({params}) => {
     const handleSubmit = () => {
      const  details = {
         "slid" : id,
-        "comment" : comment.current.value
+        "comments" : comment.current.value
       }
       dispatch(sendEvaluation({details, token}))
       .unwrap()

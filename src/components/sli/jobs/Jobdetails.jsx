@@ -4,15 +4,38 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { AiOutlineLink } from "react-icons/ai";
 import { FaIndustry } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { getJob} from "@/redux/slices/sliceActions";
+import { getJob, bookJob} from "@/redux/slices/sliceActions";
 import Link from "next/link";
+import SnackBar from '@/components/shared/SnackBar'
+import { useRouter } from 'next/navigation'
 
 const Jobdetail = ({params}) => {
     const id = params?.jobId
     const dispatch = useDispatch();
+    const router = useRouter();
     const {user} = useSelector(state => state.customer);
     const token = user?.accessToken
     const job = useSelector(state => state.customer.job);
+
+    const [show, setshow] = useState({
+      open:false,
+      text: '',
+      mood: 'error'
+    })
+
+    const handleBookJob = () => {
+      dispatch(bookJob({id, token}))
+      .unwrap()
+      .then((res)=>{
+        setshow({open:true, text: 'Job booked succesfully', mood: 'success'})
+        router.push('/sli/dashboard') 
+        console.log(res)
+      })
+      .catch((error)=>{
+        setshow({open:true, text: 'Failed , try again', mood: 'error'})
+        console.error(error)
+      })
+    }
 
     useEffect(() => {
         dispatch(getJob({id,token}))
@@ -68,7 +91,7 @@ const Jobdetail = ({params}) => {
           </svg>
         </div>
         <div className="max-w-xl mb-6">
-          <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+          <h2 className="max-w-lg mb-6  text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
             Job description
 
           </h2>
@@ -92,13 +115,13 @@ const Jobdetail = ({params}) => {
           <a
             href={job?.link}
             aria-label=""
-            className="items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
+            className="items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:underline decoration-orange-500 hover:text-purple-800"
           >
            
             Link
           </a>
         </div>
-        <div className='flex space-x-2'>
+        {/* <div className='flex space-x-2'>
         <FaIndustry className='text-rose-500 w-5 h-5'/>
           <a
             href="/"
@@ -108,7 +131,7 @@ const Jobdetail = ({params}) => {
             
             Industry
           </a>
-        </div>
+        </div> */}
       </div>
 
       <div className="flex items-center justify-center -mx-4 lg:pl-8">
@@ -133,8 +156,11 @@ const Jobdetail = ({params}) => {
         </div>
         
       </div>
-      {/* <div className='flex justify-end'>book</div> */}
+      <div className='flex justify-start'>
+        <button onClick={handleBookJob} className="bg-yellow-600 px-4 py-2 rounded-lg">Book Now</button>
+      </div>
     </div>
+    <SnackBar value={show.open} text={show.text} mood={show.mood}/>
   </div>
 
   )
