@@ -157,8 +157,8 @@ const TeamRatings = () => {
                         </TableCell>
                         
                         <TableCell>
-                          <Badge type={user.rating > '3.9' ? 'success' : user.rating > '3.4' && user.rating < '4.0' ? 'primary' : 'warning'}>
-                            {user.rating > '3.9' ? 'Passed' : user.rating > '3.4' && user.rating < '4.0' ? 'Training' : 'Failed'}
+                          <Badge type={user?.status == 'ACCEPTED' ? 'success' : user?.status == 'ACCEPTED_TRAINING' ? 'neutral' : 'warning' }>
+                            {user?.status}
                             </Badge>
                         </TableCell>
                       </TableRow>

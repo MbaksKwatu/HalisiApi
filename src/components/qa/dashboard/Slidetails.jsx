@@ -9,6 +9,7 @@ import { IoMdStarHalf } from "react-icons/io";
 import { PiShootingStarThin } from "react-icons/pi";
 import Link from "next/link";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import SnackBar from '@/components/shared/SnackBar'
 
 
 const SliProfileDetail = ({params}) => {
@@ -21,12 +22,27 @@ const SliProfileDetail = ({params}) => {
     
     const comment  = useRef(null)
 
+    const [show, setshow] = useState({
+      open:false,
+      text: '',
+      mood: 'error'
+    })
+
+
     const handleSubmit = () => {
      const  details = {
         "slid" : id,
         "comment" : comment.current.value
       }
       dispatch(sendEvaluation({details, token}))
+      .unwrap()
+      .then((res)=> {
+        setshow({open:true, text: 'Evaluation sent successfully', mood: 'success'})
+        console.log(res)
+      })
+      .catch((error)=> {
+        setshow({open:true, text: 'Failed to send evaluation, please try again!', mood: 'error'})
+      })
     }
 
     useEffect(() => {
@@ -166,6 +182,7 @@ const SliProfileDetail = ({params}) => {
             </div>
           </div>
         </div>
+        <SnackBar value={show.open} text={show.text} mood={show.mood}/>
       </main>
   )
 }
