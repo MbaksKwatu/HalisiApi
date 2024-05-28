@@ -30,9 +30,9 @@ const Resources = () => {
              
               <br />
               <br />
-              Click on a the SLI name to access their details and rate them.
+              Click on a the SLI name to access their details and rate them. <br />
               You will not be allowed to Re-Rate an SLI you rated before.
-              The star ratings are compulsory so ensure you do Fill them in
+              The star ratings are compulsory so ensure you do fill them in.
               The stars are 4 in total with 1 as the least rating and 4 as the maximum rating.
               Comments are Optional during Rating
               Submitted Ratings cant be changed on submission
@@ -43,7 +43,9 @@ const Resources = () => {
               <br />
               <br />
               80% above: Onboarded onto the Hali Halisi digital platform
+              <br />
               60% - 80%: Interpreter training program
+              <br />
               60% below: Referred to a Kenyan sign language course
               </p>
             </div>

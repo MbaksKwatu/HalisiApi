@@ -1,11 +1,18 @@
-'use client'
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Provider } from "react-redux";
-import { RatingsProvider } from '../app/panel/add-ratings/[[...stepIndex]]/RatingsContext';
-import store from '@/redux/store'
 
+import  { Metadata } from "next";
+import "./globals.css";
+import ClientProvider from "./ClientProvider";
+import favicon from '@/images/Platform Feedback icon.png'
+
+
+export const metadata: Metadata = {
+  title: 'Hali Halisi',
+  description: 'Hali Halisi is the place for top-tier, vetted Sign Interpreters to advance their careers and access exclusive opportunities.',
+  icons:{
+      icon:favicon.src,
+      apple:favicon.src
+  }
+}
 
 
 export default function RootLayout({
@@ -16,11 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body >
-      
-      <Provider store={store}>
+      <ClientProvider >
         {children}
-        </Provider>
-        
+        </ClientProvider>
         </body>
     </html>
   );

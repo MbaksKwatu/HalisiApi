@@ -9,7 +9,6 @@ import {
   TableCell,
   TableRow,
   TableFooter,
-  Avatar,
   Badge,
   Pagination,
 } from "@windmill/react-ui";
@@ -136,13 +135,13 @@ const Dashboard = () => {
 
               </div>
 
-              <TableContainer>
+              <TableContainer >
                 <Table>
                   <TableHeader>
                     <tr>
                       <TableCell>Job Title</TableCell>
                       <TableCell>Details</TableCell>
-                      <TableCell>Industry</TableCell>
+                      {/* <TableCell>Industry</TableCell> */}
                       <TableCell>Location</TableCell>
                       <TableCell>Mode</TableCell>
                       <TableCell>Date</TableCell>
@@ -162,9 +161,9 @@ const Dashboard = () => {
                         <TableCell>
                           <span className="text-sm"> {user.description}</span>
                         </TableCell>
-                        <TableCell>
+                        {/* <TableCell>
                           <Badge type={user.status}>{user.status}</Badge>
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell>
                           <span className="text-sm"> {user.location}</span>
                         </TableCell>

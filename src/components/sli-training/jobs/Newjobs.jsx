@@ -24,6 +24,7 @@ import Header from '../Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getTrainingTasks,getTrainingStats } from "@/redux/slices/sliceActions";
 import useAuth from '@/hooks/useAuth'
+import Link from "next/link";
 
 
 const Newjobs = () => {
@@ -123,11 +124,17 @@ const Newjobs = () => {
                     {tasks?.tasks?.map((user, i) => (
                       <TableRow key={i}>
                         <TableCell>
-                          <div className="flex items-center text-sm">
+                          {/* <div className="flex items-center text-sm">
                             <div>
                               <p className="font-semibold">{user.task.name}</p>
                              
                             </div>
+                          </div> */}
+                          <div className="flex hover:underline decoration-orange-500 items-center text-sm">
+                            <Link href={`/sli/training/tasks/${user?.task.ID}`}>
+                              <p className="font-semibold">{user?.task.name}</p>
+                              
+                            </Link>
                           </div>
                         </TableCell>
                         <TableCell>

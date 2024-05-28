@@ -3,6 +3,8 @@ import React, {useEffect} from "react";
 import { IoMdContact } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { getPanelistProfile } from "@/redux/slices/sliceActions";
+import Link from "next/link";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -19,7 +21,8 @@ const Profile = () => {
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="grid gap-10 row-gap-8 lg:grid-cols-5">
         <div className="lg:col-span-2   px-4 py-6">
-          <a href="/panel/dashboard" className="text-sm  hover:underline decoration-orange-500 ">Home</a>
+       
+          {/* <a href="/panel/dashboard" className="text-sm  hover:underline decoration-orange-500 ">Home</a> */}
           <p className="text-xl font-semibold mb-3">Profile</p>
           <div className="border border-gray-200 px-4 py-6">
           <div className="flex justify-center">
@@ -41,6 +44,18 @@ const Profile = () => {
             
           </div>
           </div>
+
+          <div className=" mt-4  py-6">
+          <div className="">
+            <Link href={`/panel/dashboard`}>
+              <button className="border border-yellow-500 flex space-x-2 text-yellow-700 px-4 py-2 rounded-md">
+                <IoIosArrowRoundBack className="w-5 h-5"/>
+                Back to Dashboard
+              </button>
+            </Link> 
+          </div>
+          </div>
+
         </div>
 
         <div className="flex flex-col  lg:col-span-3  px-4 py-6">

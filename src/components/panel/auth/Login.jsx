@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '@/redux/slices/sliceActions';
 import { ClipLoader, BarLoader } from 'react-spinners';
+import Image from "next/image";
+import HalisiIcon from '@/images/Platform Feedback icon.png'
 
 
 const Login = () => {
@@ -30,15 +32,17 @@ const Login = () => {
     dispatch(loginUser(details))
     .unwrap()
     .then((res)=>{
-      setshow({open:true, text: 'Login was successful', mood: 'success'})
-      console.log(res)
       if(res.userGroup == 'COUNCIL_MEMBER'){
+        setshow({open:true, text: 'Login was successful', mood: 'success'})
         router.push('/panel/dashboard') 
       }else if (res.userGroup == 'QUALITY_ASSURANCE') {
+        setshow({open:true, text: 'Login was successful', mood: 'success'})
         router.push('/qa/dashboard')  
       }else if (res.userGroup == 'SIGN INTERPRETER'){
+        setshow({open:true, text: 'Login was successful', mood: 'success'})
         router.push('/sli/dashboard') 
       }else if (res.userGroup == 'SI_TRAINING'){
+        setshow({open:true, text: 'Login was successful', mood: 'success'})
         router.push('/sli/training/dashboard')
       }
     })
@@ -53,20 +57,28 @@ const Login = () => {
 
 
   return (
-    <div className="py-8 mt-6 w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-xl">
+    <div className="py-16 mt-6 w-full max-w-sm mx-auto  overflow-hidden bg-white rounded-lg shadow-md  lg:max-w-xl">
       <div className="w-full px-6 py-8 md:px-8 ">
-        <p className="mt-3 text-2xl font-bold text-center text-gray-600 ">
+        <div className="w-full flex justify-center  gap-x-2">
+          <Image src={HalisiIcon} className="w-8 h-8" />
+            <div>
+                <span className="block text-gray-700 text-2xl font-extrabold ">Hali Halisi</span>
+                
+            </div>
+            
+        </div>
+        <p className="mt-3 text-xl font-bold text-center text-gray-600 ">
           Welcome back
         </p>
 
         <div className="text-center items-center justify-between mt-4">
-          <p className="text-gray-400 text-xs">
+          <p className="text-gray-400 text-sm">
             Enter your details to sign in your account
           </p>
-          <p className="text-gray-800 text-sm">
-            Dont have an account?{" "}
+          {/* <p className="text-gray-800 text-sm">
+            Don&apos;t have an account?{" "}
             <a href='/panel/signup' className="text-yellow-500 text-sm">Register Now</a>{" "}
-          </p>
+          </p> */}
         </div>
 
         <div className="mt-4">

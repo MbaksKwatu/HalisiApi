@@ -3,6 +3,8 @@ import React, {useEffect} from "react";
 import { IoMdContact } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { getPanelistProfile } from "@/redux/slices/sliceActions";
+import Link from "next/link";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -39,6 +41,16 @@ const Profile = () => {
               Quality Assuarance
             </p>
             
+          </div>
+          </div>
+          <div className=" mt-4  py-6">
+          <div className="">
+            <Link href={`/qa/dashboard`}>
+              <button className="border border-yellow-500 flex space-x-2 text-yellow-700 px-4 py-2 rounded-md">
+                <IoIosArrowRoundBack className="w-5 h-5"/>
+                Back to Dashboard
+              </button>
+            </Link> 
           </div>
           </div>
         </div>
