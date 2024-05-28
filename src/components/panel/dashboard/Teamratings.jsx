@@ -26,6 +26,7 @@ const TeamRatings = () => {
   const profileRef = useRef();
   const dispatch = useDispatch();
   const {user} = useSelector(state => state.customer);
+  const token = user?.accessToken
   const stats = useSelector(state => state.customer?.ratingstats);
   const ratings = useSelector(state => state.customer?.ratings);
   const [page, setPage] = useState(1);
@@ -39,8 +40,8 @@ const TeamRatings = () => {
   }
 
   useEffect(() => {
-    dispatch(getSLIRatingStats())
-    dispatch(getSLIRatings({page}))
+    dispatch(getSLIRatingStats({token}))
+    dispatch(getSLIRatings({page, token}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 

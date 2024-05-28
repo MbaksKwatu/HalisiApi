@@ -30,6 +30,7 @@ const Dashboard = () => {
   const profileRef = useRef();
   const dispatch = useDispatch()
   const {user} = useSelector(state => state.customer);
+  const token = user?.accessToken
   const slis = useSelector(state => state.customer?.slis)
   const stats = useSelector(state => state.customer?.dstats)
  
@@ -46,8 +47,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
-    dispatch(getSLIs({page}))
-    dispatch(getDashboardStats())
+    dispatch(getSLIs({page,token}))
+    dispatch(getDashboardStats({token}))
   }, [page]);
 
   return (

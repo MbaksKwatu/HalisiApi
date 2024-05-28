@@ -34,8 +34,8 @@ const Login = () => {
       console.log(res)
       if(res.userGroup == 'COUNCIL_MEMBER'){
         router.push('/panel/dashboard') 
-      }else {
-        setshow({open:true, text: 'That page is restricted', mood: 'error'}) 
+      }else if (res.userGroup == 'QUALITY_ASSURANCE') {
+        router.push('/qa/dashboard')  
       }
     })
     .catch((error)=>{

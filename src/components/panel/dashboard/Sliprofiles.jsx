@@ -30,6 +30,7 @@ const Sliprofiles = () => {
   const profileRef = useRef();
   const dispatch = useDispatch()
   const customer = useSelector(state => state.customer)
+  const token = customer?.accessToken
   const slis = useSelector(state => state.customer?.slis)
   const stats = useSelector(state => state.customer?.stats)
   
@@ -55,8 +56,8 @@ const Sliprofiles = () => {
 
   useEffect(() => {
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
-    dispatch(getSLIs({page,statusFilter}))
-    dispatch(getProfileStats())
+    dispatch(getSLIs({page,statusFilter,token}))
+    dispatch(getProfileStats({token}))
   }, [page,statusFilter]);
 
   return (

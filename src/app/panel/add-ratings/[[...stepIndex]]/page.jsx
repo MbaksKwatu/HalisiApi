@@ -42,6 +42,7 @@ const PageContent = ({params}) => {
 
   const cps = useSelector(state => state.customer?.cps)
   const customer = useSelector(state => state.customer)
+  const token = customer?.user?.accessToken
 
   const [show, setshow] = useState({
     open:false,
@@ -52,7 +53,7 @@ const PageContent = ({params}) => {
 
 
   useEffect(() => {
-    dispatch(getCPS());
+    dispatch(getCPS({token}));
     if (message == "SLI rated successfully") {
       setshow({open:true, text: 'SLI rated successfully', mood: 'success'})
     }
@@ -85,7 +86,7 @@ const PageContent = ({params}) => {
     <div>
       <ContentComponent questions={questionSet}  />
       {stepIndex === 6 && (
-      <button onClick={() => handleSubmit(ratings,sliId,customer,dispatch,setshow,router)} className="mt-3 bg-cyan-400 px-4 py-2 rounded-lg">
+      <button onClick={() => handleSubmit(ratings,sliId,customer,dispatch,setshow,router,token)} className="mt-3 bg-cyan-400 px-4 py-2 rounded-lg">
         {loading?  ( <> <ClipLoader color='white' size={20}  /> Please wait </>) : "Submit Ratings"}
         </button>
     )}
@@ -95,7 +96,7 @@ const PageContent = ({params}) => {
  
 };
 
-const handleSubmit = async (ratings,sliId,customer,dispatch,setshow,router) => {
+const handleSubmit = async (ratings,sliId,customer,dispatch,setshow,router,token) => {
   const ratingsArray = Object.keys(ratings).map((key) => {
     const rating = ratings[key];
     return {
@@ -119,7 +120,7 @@ const handleSubmit = async (ratings,sliId,customer,dispatch,setshow,router) => {
   }
  
  
-  dispatch(createRatings(details))
+  dispatch(createRatings({details,token}))
   .unwrap()
   .then((res)=>{
     setshow({open:true, text: 'SLI rated successfully', mood: 'success'})
