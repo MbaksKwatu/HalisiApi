@@ -36,6 +36,10 @@ const Login = () => {
         router.push('/panel/dashboard') 
       }else if (res.userGroup == 'QUALITY_ASSURANCE') {
         router.push('/qa/dashboard')  
+      }else if (res.userGroup == 'SIGN INTERPRETER'){
+        router.push('/sli/dashboard') 
+      }else if (res.userGroup == 'SI_TRAINING'){
+        router.push('/sli/training/dashboard')
       }
     })
     .catch((error)=>{
