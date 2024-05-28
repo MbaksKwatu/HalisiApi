@@ -86,7 +86,7 @@ const Profile = () => {
 
       <div className="flex space-x-8">
         <div className="w-1/4 rounded-md  px-4 py-6">
-          <a href="/sli/dashboard" className="text-sm  hover:underline decoration-orange-500 ">Home</a>
+          <a href="/sli/training/dashboard" className="text-sm  hover:underline decoration-orange-500 ">Home</a>
           <p className="text-2xl font-semibold mb-3">Profile</p>
           <div className="border border-gray-200 rounded-md px-4 py-6">
           <div className="flex justify-center">
@@ -103,7 +103,7 @@ const Profile = () => {
               {profile?.name}
             </p>
             <p className="text-sm font-medium  text-gray-600">
-              Parachichi Panelist
+              Sign interpreter
             </p>
             
           </div>
