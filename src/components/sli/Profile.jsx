@@ -103,7 +103,7 @@ const Profile = () => {
               {profile?.name}
             </p>
             <p className="text-sm font-medium  text-gray-600">
-              Parachichi Panelist
+              Sign Interpreter
             </p>
             
           </div>

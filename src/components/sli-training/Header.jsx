@@ -70,7 +70,7 @@ const Header = () => {
                           {"user@gmail.com"}
                         </span> */}
                         <a
-                          href="/sli/profile"
+                          href="/sli/training/profile"
                           className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150"
                         >
                           Profile
