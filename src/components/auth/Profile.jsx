@@ -7,10 +7,12 @@ import { getPanelistProfile } from "@/redux/slices/sliceActions";
 const Profile = () => {
   const dispatch = useDispatch()
   const customer = useSelector(state => state.customer)
+  const id = customer?.user?.id;
+  const token = customer?.user?.accessToken
   const profile = useSelector(state => state.customer.profile)
   
   useEffect(() => {
-    dispatch(getPanelistProfile(customer?.user?.id))
+    dispatch(getPanelistProfile({id, token}))
   }, []);
 
   return (

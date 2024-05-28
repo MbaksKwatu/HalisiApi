@@ -38,7 +38,7 @@ const Header = () => {
                 </button>
               </div>
               <div className="flex text-2xl font-bold text-gray-900 space-x-3 ml-6 ">
-                <p>Parachichi </p>
+                <p>QA </p>
                 <p>Dashboard</p>
                 
               </div>

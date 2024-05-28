@@ -67,8 +67,8 @@ const Sidebar = () => {
             ,
         },
         {
-            href: '/qa/panel-profiles',
-            name: 'Panel Profiles',
+            href: '/qa/panel-ratings',
+            name: 'Panel Ratings',
             icon: <IoIosPeople className="w-6 h-6"/>
             ,
         },

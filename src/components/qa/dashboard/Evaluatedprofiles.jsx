@@ -18,7 +18,7 @@ import { BsEnvelopePaper } from "react-icons/bs";
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getSLIRatingStats , getSLIRatings } from "@/redux/slices/sliceActions";
+import { getSLIRatingStats , getSLIRatings, getQaSlis } from "@/redux/slices/sliceActions";
 import Header from "./Header";
 import useAuth from '@/hooks/useAuth'
 
@@ -27,10 +27,12 @@ const EvaluatedProfiles = () => {
   const profileRef = useRef();
   const dispatch = useDispatch();
   const {user} = useSelector(state => state.customer);
+  const token = user?.accessToken
   const stats = useSelector(state => state.customer?.ratingstats);
-  const ratings = useSelector(state => state.customer?.ratings);
+  const ratings = useSelector(state => state.customer?.qaslis);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
+  const statusFilter = 'COMPLETED'
 
   const resultsPerPage = 10;
   const totalResults = ratings?.metadata?.total;
@@ -41,7 +43,7 @@ const EvaluatedProfiles = () => {
 
   useEffect(() => {
     dispatch(getSLIRatingStats())
-    dispatch(getSLIRatings())
+    dispatch(getQaSlis({page,token, statusFilter}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
 
@@ -113,12 +115,10 @@ const EvaluatedProfiles = () => {
                         </TableCell>
                         
                         <TableCell>
-                          <Badge type={user.rating > '3.9' ? 'success' : user.rating > '3.4' && user.rating < '4.0' ? 'primary' : 'warning'}>
-                            {user.rating > '3.9' ? 'Passed' : user.rating > '3.4' && user.rating < '4.0' ? 'Traing' : 'Failed'}
-                            </Badge>
+                        <Badge type={user?.status == 'PENDING' ? 'primary' : user.status == 'REJECTED' ? 'warning' : 'success'}>{user.status == 'PENDING' ? 'PENDING' : user.status == 'ACCEPTED' ? 'ACCEPTED' : user.status == 'REJECTED' ? 'REJECTED' : user.status == 'ACCEPTED_TRAINING' ? 'ACCEPTED_TRAINING' : 'PENDING'}</Badge>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user.panelScore}%</span>
+                          <Badge type={user?.qaCheckStatus == 'PENDING' ? 'primary' : 'success'}>{user.qaCheckStatus}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}

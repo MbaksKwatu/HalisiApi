@@ -21,7 +21,7 @@ import { MdLockOutline } from "react-icons/md";
 import { TbPhotoCheck } from "react-icons/tb";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getSLIs, getDashboardStats } from "@/redux/slices/sliceActions";
+import { getQaSlis, getQaStats } from "@/redux/slices/sliceActions";
 
  import useAuth from '@/hooks/useAuth'
 
@@ -32,8 +32,11 @@ const Dashboard = () => {
   const profileRef = useRef();
   const dispatch = useDispatch()
   const {user} = useSelector(state => state.customer);
-  const slis = useSelector(state => state.customer?.slis)
-  const stats = useSelector(state => state.customer?.dstats)
+ 
+  const token = user?.accessToken
+  
+  const slis = useSelector(state => state.customer?.qaslis)
+  const stats = useSelector(state => state.customer?.qastats)
  
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -48,8 +51,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
-    dispatch(getSLIs())
-    dispatch(getDashboardStats())
+    dispatch(getQaSlis({token,page}))
+    dispatch(getQaStats({token}))
   }, [page]);
 
   return (
@@ -71,11 +74,9 @@ const Dashboard = () => {
                 <div className="flex items-center w-full space-x-4">
                   <div className="w-1/2 ">
                     <div className="relative w-full px-4 py-6 bg-teal-50 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-black ">Interviews</p>
-                      <p className="text-xl font-bold text-black ">{stats?.upcoming} Upcoming</p>
-                      {/* <p className="text-sm text-gray-400">
-                        View all Upcoming Interviews
-                      </p> */}
+                      <p className="text-md font-bold text-black ">New</p>
+                      <p className="text-xl font-bold text-black ">{stats[0]?.count}</p>
+                     
                       <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
                         <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
                       </span>
@@ -83,27 +84,16 @@ const Dashboard = () => {
                   </div>
                   <div className="w-1/2">
                     <div className="relative w-full px-4 py-6 bg-purple-100 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-black ">Resources</p>
-                      <p className="text-xl font-bold text-black ">Files</p>
-                      {/* <p className="text-sm text-gray-400">
-                        View all Rating Process
-                      </p> */}
+                      <p className="text-md font-bold text-black ">Completed</p>
+                      <p className="text-xl font-bold text-black ">{stats[1]?.count || 0}</p>
+                      
                       <span className="absolute hidden lg:flex  p-4 border border-purple-500  rounded-md top-4 right-4">
                         <MdLockOutline className="text-purple-500 h5 w-5" />
                       </span>
                     </div>
                   </div>
                   <div className="w-1/2">
-                    <div className="relative w-full px-4 py-6 bg-orange-200 rounded-md shadow-lg ">
-                      <p className="text-md font-bold text-black ">SLI Profiles</p>
-                      <p className="text-xl font-bold text-black ">{stats?.sliProfiles}</p>
-                      {/* <p className="text-sm text-gray-400">
-                        View all SLI profiles
-                      </p> */}
-                      <span className="absolute hidden lg:flex  p-4 border border-teal-500 rounded-md top-2 right-4">
-                        <TbPhotoCheck className="text-teal-500 h5 w-5" />
-                      </span>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -112,69 +102,17 @@ const Dashboard = () => {
                 <LuFileSpreadsheet className="w-6 h-6 text-yellow-500" />
                 <h1 className="text-xl font-bold text-gray-800 ">SLI List</h1>
               </div>
-              {/* <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                              Name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Level of Education
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                County
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Gender
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      {slis?.data?.map((user, i) => (
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                       
-                          <>
-                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {user?.name}
-                          </th>
-                          <td class="px-6 py-4">
-                          {user?.levelOfEducation}
-                          </td>
-                          <td class="px-6 py-4">
-                          {user?.county}
-                          </td>
-                          <td class="px-6 py-4">
-                          {user.gender}
-                          </td>
-                          <td class="px-6 py-4">
-                          {user.status}
-                          </td>
-                          </>
-                          </tr>
-
-                        ))}
-                            
-                      
-                        
-                      
-                    </tbody>
-                </table>
-            </div> */}
+             
 
               <TableContainer>
                 <Table>
                   <TableHeader>
                     <tr>
-                      <TableCell>Name</TableCell>
-                      <TableCell>Level of education</TableCell>
-                      <TableCell>County</TableCell>
-                      <TableCell>Gender</TableCell>
-                      <TableCell>Date</TableCell>
-                      <TableCell>Status</TableCell>
+                      <TableCell>SLI Names</TableCell>
+                      <TableCell>Perfomance Score</TableCell>
+                      <TableCell>Panel Rating</TableCell>
+                      <TableCell>Evaluation</TableCell>
+                      
                     </tr>
                   </TableHeader>
                   <TableBody>
@@ -183,28 +121,22 @@ const Dashboard = () => {
                         <TableCell>
                           <div className="flex items-center text-sm">
                             <div>
-                              <a href={`/panel/sli-profiles/${user.ID}`} className="font-semibold hover:underline decoration-orange-500">{user?.name}</a>
+                              <a href={`/qa/sli-profiles/${user.ID}`} className="font-semibold hover:underline decoration-orange-500">{user?.name}</a>
                             </div>
                           </div>
                           
                         </TableCell>
                         <TableCell>
-                        <span className="text-sm"> {user?.levelOfEducation}</span>
+                        <span className="text-sm"> {user?.panelScore} %</span>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user?.county}</span>
+                        <Badge type={user?.status == 'PENDING' ? 'primary' : 'success'}>{user.status == 'PENDING' ? 'PENDING' : user.status == 'ACCEPTED' ? 'ACCEPTED' : user.status == 'REJECTED' ? 'REJECTED' : user.status == 'ACCEPTED_TRAINING' ? 'ACCEPTED_TRAINING' : 'PENDING'}</Badge>
                         </TableCell>
-                        <TableCell>
-                          <Badge type={user?.status}>{user.gender}</Badge>
-                        </TableCell>
+                      
+                       
                        
                         <TableCell>
-                          <span className="text-sm">
-                            {new Date(user?.createdAT).toLocaleDateString()}
-                          </span>
-                        </TableCell>
-                        <TableCell>
-                          <Badge type={user?.status == 'PENDING' ? 'primary' : 'success'}>{user.status}</Badge>
+                          <Badge type={user?.qaCheckStatus == 'PENDING' ? 'primary' : 'success'}>{user.qaCheckStatus}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}

@@ -18,10 +18,14 @@ const initialState = {
     ratingstats : {},
     ratings : {},
     jobs : {},
+    job : {},
     jobsstats:{},
     trainingstats: {},
     trainingtasks: {},
     trainingtask: {},
+    qastats: {},
+    qaslis: {},
+    qasli : {}
     
 
 }
@@ -322,6 +326,54 @@ const userSlice = createSlice({
               state.error = ""
       })
       builder.addCase(actions.getTrainingTask.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getQaStats.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getQaStats.fulfilled, (state, action)=>{
+              state.loading = false
+              state.qastats = action.payload
+              state.message = "QA stats fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getQaStats.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getQaSlis.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getQaSlis.fulfilled, (state, action)=>{
+              state.loading = false
+              state.qaslis = action.payload
+              state.message = "QA stats fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getQaSlis.rejected, (state, action)=>{
+              state.loading=false;
+              state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
+              state.message = action.error.message
+      })
+
+      builder.addCase(actions.getQaSli.pending, (state)=>{
+        state.loading = true;
+      })
+
+      builder.addCase(actions.getQaSli.fulfilled, (state, action)=>{
+              state.loading = false
+              state.qasli = action.payload
+              state.message = "QA stats fetched successfully"
+              state.error = ""
+      })
+      builder.addCase(actions.getQaSli.rejected, (state, action)=>{
               state.loading=false;
               state.error = action.error.message.split(" ")[action.error.message.split(" ").length-1]
               state.message = action.error.message
