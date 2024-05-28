@@ -10,7 +10,7 @@ const useAuth = () => {
 
   useEffect(() => {
     if (!user) {
-      router.push('/panel/login');
+      router.push('/login');
     }
   }, [user, router]);
 };

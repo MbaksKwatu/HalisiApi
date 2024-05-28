@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import SnackBar from '@/components/shared/SnackBar'
 import { ClipLoader, BarLoader } from 'react-spinners';
 import Image from 'next/image';
-import BgImage from '@/images/happypanel11.png'
+import BgImage from '@/images/bg1.jpg'
 
 const Signup = () => {
     const dispatch = useDispatch();
@@ -185,10 +185,11 @@ const Signup = () => {
         </div>
       </div>
       <div className="hidden bg-cover lg:block lg:w-1/2">
-        <Image src={BgImage} className='w-full h-full' />
+        <Image src={BgImage} className='w-full h-full rounded-md' />
         {/* <img
-          src="https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80"
+          src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&auto=format&fit=crop"
           alt="bg"
+          className='h-full'
         /> */}
       </div>
       <SnackBar value={show.open} text={show.text} mood={show.mood}/>

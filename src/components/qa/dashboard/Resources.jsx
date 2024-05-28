@@ -23,16 +23,30 @@ const Resources = () => {
               </h1>
 
               <p className="text-gray-700 mt-4 lg:text-sm lg:max-w-2xl">
-                Class is dead, says Foucault; however, according to Reicher, it is
-                not so much class that is dead, but rather the absurdity, and some
-                would say the paradigm, of class. However, the subject is interpolated
-                into a postpatriarchialist dialectic theory that includes
-                consciousness as a totality.
+                Hali Halisi strives to ensure we get qualified sign interpreters on the platform
+               <br />
+               <br />
+               <span className="py-2 font-semibold"> HOW TO RATE</span>
+             
+              <br />
+              <br />
+              Click on a the SLI name to access their details and rate them.
+              You will not be allowed to Re-Rate an SLI you rated before.
+              The star ratings are compulsory so ensure you do Fill them in
+              The stars are 4 in total with 1 as the least rating and 4 as the maximum rating.
+              Comments are Optional during Rating
+              Submitted Ratings cant be changed on submission
+              <br />
+              <br />
+              <span className="font-semibold">HOW TO READ RATINGS</span>
+              
+              <br />
+              <br />
+              80% above: Onboarded onto the Hali Halisi digital platform
+              60% - 80%: Interpreter training program
+              60% below: Referred to a Kenyan sign language course
               </p>
 
-              
-
-    
             </div>
           </div>
         </div>

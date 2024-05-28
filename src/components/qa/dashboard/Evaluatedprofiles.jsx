@@ -18,7 +18,7 @@ import { BsEnvelopePaper } from "react-icons/bs";
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getSLIRatingStats , getSLIRatings, getQaSlis } from "@/redux/slices/sliceActions";
+import { getSLIRatingStats , getQaStats , getQaSlis } from "@/redux/slices/sliceActions";
 import Header from "./Header";
 import useAuth from '@/hooks/useAuth'
 
@@ -28,7 +28,7 @@ const EvaluatedProfiles = () => {
   const dispatch = useDispatch();
   const {user} = useSelector(state => state.customer);
   const token = user?.accessToken
-  const stats = useSelector(state => state.customer?.ratingstats);
+  const stats = useSelector(state => state.customer?.qastats);
   const ratings = useSelector(state => state.customer?.qaslis);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -42,7 +42,7 @@ const EvaluatedProfiles = () => {
   }
 
   useEffect(() => {
-    dispatch(getSLIRatingStats())
+    dispatch(getQaStats ({token}))
     dispatch(getQaSlis({page,token, statusFilter}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page]);
@@ -68,7 +68,7 @@ const EvaluatedProfiles = () => {
                 <div className="w-1/2 ">
                     <div className="relative w-full px-4 py-6 bg-green-200 rounded-md shadow-lg ">
                       <p className="text-xl font-bold text-black ">Completed</p>
-                      <p className="text-xl font-bold text-black ">12</p>
+                      <p className="text-xl font-bold text-black ">{stats[1]?.count}</p>
                      
                       <span className="absolute hidden lg:flex  p-4 border border-cyan-500  rounded-md top-4 right-4">
                         <BsEnvelopePaper className="text-cyan-500 h5 w-5" />
