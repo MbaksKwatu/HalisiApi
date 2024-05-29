@@ -507,6 +507,22 @@ export const createUserPanel = createAsyncThunk(
 //   },
 // )
 
+// export const bookJob = createAsyncThunk(
+//   'sli/job/book',
+//   async ({ id, token }) => {
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     }
+//     const response = await axios.post(
+//       `${baseUrl}/api/v1/si/slijobs/${id}/book`,
+//       { ...config, withCredentials: true },
+//     )
+//     return response.data
+//   },
+// )
+
 export const bookJob = createAsyncThunk(
   'sli/job/book',
   async ({ id, token }) => {
@@ -514,14 +530,16 @@ export const bookJob = createAsyncThunk(
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
+      withCredentials: true,
+    };
     const response = await axios.post(
       `${baseUrl}/api/v1/si/slijobs/${id}/book`,
-      { ...config, withCredentials: false },
-    )
-    return response.data
-  },
-)
+      {}, // Request body is an empty object
+      config
+    );
+    return response.data;
+  }
+);
 
 
 
