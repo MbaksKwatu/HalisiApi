@@ -33,7 +33,7 @@ const Bookedjobs = () => {
   const {user} = useSelector(state => state.customer);
   const token = user?.accessToken
   const jobs = useSelector(state => state.customer.jobs);
-  const statusFilter = "CLAIMED";
+  const statusFilter = "booked";
   const stats = useSelector(state => state.customer.jobsstats);
 
   const resultsPerPage = 10;
@@ -47,7 +47,7 @@ const Bookedjobs = () => {
     dispatch(getJobs({token,statusFilter}))
     dispatch(getJobsStats({token}))
     setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
-  }, [page]);
+  }, [page,statusFilter]);
 
   return (
     <>
@@ -109,10 +109,10 @@ const Bookedjobs = () => {
                 <Table>
                   <TableHeader>
                     <tr>
-                      <TableCell>Job Title</TableCell>
+                    <TableCell>Job Title</TableCell>
                       <TableCell>Details</TableCell>
-                      {/* <TableCell>Industry</TableCell> */}
-                      <TableCell>Location</TableCell>
+                      <TableCell>Industry</TableCell>
+                      <TableCell>Duration</TableCell>
                       <TableCell>Mode</TableCell>
                       <TableCell>Date</TableCell>
                       <TableCell>Status</TableCell>
@@ -125,19 +125,19 @@ const Bookedjobs = () => {
                           <div className="flex items-center text-sm">
                           <div className="flex hover:underline decoration-orange-500 items-center text-sm">
                             <Link href={`/sli/jobs/${user.ID}`}>
-                              <p className="font-semibold">{user.description}</p>
+                              <p className="font-semibold">{user.name}</p>
                             </Link>
                           </div>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user.description}</span>
+                          <span className="text-sm capitalize"> {user.description}</span>
                         </TableCell>
-                        {/* <TableCell>
-                        <span className="text-sm"> {user.job}</span>
-                        </TableCell> */}
                         <TableCell>
-                        <span className="text-sm"> {user.location}</span>
+                        <span className="text-sm capitalize"> {user.industryOfInterpretation}</span>
+                        </TableCell>
+                        <TableCell>
+                        <span className="text-sm capitalize"> {user.duration}</span>
                         </TableCell>
                         <TableCell>
                         <span className="text-sm"> {user.mode}</span>

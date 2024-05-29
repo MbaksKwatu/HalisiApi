@@ -157,7 +157,9 @@ const Jobdetail = ({params}) => {
         
       </div>
       <div className='flex justify-start'>
-        <button onClick={handleBookJob} className="bg-yellow-600 px-4 py-2 rounded-lg">Book Now</button>
+        {job?.status == 'AVAILABLE' ? (
+           <button onClick={handleBookJob} className="bg-yellow-600 px-4 py-2 rounded-lg">Book Now</button>
+        ):null}      
       </div>
     </div>
     <SnackBar value={show.open} text={show.text} mood={show.mood}/>

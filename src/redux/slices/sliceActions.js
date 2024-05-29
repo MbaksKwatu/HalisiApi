@@ -491,6 +491,7 @@ export const createUserPanel = createAsyncThunk(
 export const bookJob = createAsyncThunk(
   'sli/job/book',
   async ({ id,token }) => {
+   
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -498,7 +499,7 @@ export const bookJob = createAsyncThunk(
     }
     const response = await axios.patch(
       `${baseUrl}/api/v1/si/slijobs/${id}/book`,
-      { ...config, withCredentials: true },
+      { ...config, withCredentials: false },
     )
     return response.data
   },
