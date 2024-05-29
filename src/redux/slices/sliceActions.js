@@ -488,16 +488,34 @@ export const createUserPanel = createAsyncThunk(
   },
 )
 
+// export const bookJob = createAsyncThunk(
+//   'sli/job/book',
+//   async ({ id,token }) => {
+   
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//       withCredentials: false
+//     }
+//     const response = await axios.patch(
+//       `${baseUrl}/api/v1/si/slijobs/${id}/book`,
+//       {},
+//       config
+//     )
+//     return response.data
+//   },
+// )
+
 export const bookJob = createAsyncThunk(
   'sli/job/book',
-  async ({ id,token }) => {
-   
+  async ({ id, token }) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
-    const response = await axios.patch(
+    const response = await axios.post(
       `${baseUrl}/api/v1/si/slijobs/${id}/book`,
       { ...config, withCredentials: false },
     )
