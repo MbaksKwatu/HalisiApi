@@ -107,10 +107,10 @@ const Newjobs = () => {
                 <Table>
                   <TableHeader>
                     <tr>
-                      <TableCell>Job Title</TableCell>
+                    <TableCell>Job Title</TableCell>
                       <TableCell>Details</TableCell>
-                      {/* <TableCell>Industry</TableCell> */}
-                      <TableCell>Location</TableCell>
+                      <TableCell>Industry</TableCell>
+                      <TableCell>Duration</TableCell>
                       <TableCell>Mode</TableCell>
                       <TableCell>Date</TableCell>
                       <TableCell>Status</TableCell>
@@ -123,19 +123,19 @@ const Newjobs = () => {
                           <div className="flex items-center text-sm">
                           <div className="flex hover:underline decoration-orange-500 items-center text-sm">
                             <Link href={`/sli/jobs/${user.ID}`}>
-                              <p className="font-semibold">{user.description}</p>
+                              <p className="font-semibold">{user.name}</p>
                             </Link>
                           </div>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user.job}</span>
+                          <span className="text-sm capitalize"> {user.description}</span>
                         </TableCell>
-                        {/* <TableCell>
-                        <span className="text-sm"> {user.job}</span>
-                        </TableCell> */}
                         <TableCell>
-                        <span className="text-sm"> {user.location}</span>
+                        <span className="text-sm capitalize"> {user.industryOfInterpretation}</span>
+                        </TableCell>
+                        <TableCell>
+                        <span className="text-sm"> {user.duration}</span>
                         </TableCell>
                         <TableCell>
                         <span className="text-sm"> {user.mode}</span>
@@ -146,7 +146,7 @@ const Newjobs = () => {
                           </span>
                         </TableCell>
                         <TableCell>
-                          <Badge type={user.status}>{user.status}</Badge>
+                          <Badge type={'success'}>{user.status}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}

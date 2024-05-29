@@ -24,6 +24,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getJobs, getJobsStats } from "@/redux/slices/sliceActions";
 import useAuth from '@/hooks/useAuth'
 import Link from "next/link";
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
+import { IoArrowBackCircleOutline,IoArrowForwardCircleOutline } from "react-icons/io5";
+// import Pagination from  '@/components/shared/Pagination'
+
+
 
 
 const Dashboard = () => {
@@ -54,6 +59,19 @@ const Dashboard = () => {
   function onPageChange(p) {
     setPage(p);
   }
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  // Calculate the range of items to display
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+
 
   useEffect(() => {
     dispatch(getJobs({token,statusFilter}))
@@ -135,14 +153,55 @@ const Dashboard = () => {
 
               </div>
 
+              {/* <div className="container mx-auto p-6">
+                <div className="bg-white shadow rounded-lg p-3">
+                  <h1 className="text-2xl font-semibold text-gray-700 mb-6">Job list</h1>
+                  <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead>
+                      <tr className="w-full bg-gray-50">
+                        <th className="py-3 px-4 border-b text-left text-sm text-gray-600 font-semibold">Job Title</th>
+                        <th className="py-3 px-4 border-b text-left text-sm text-gray-600 font-semibold">Details</th>
+                        <th className="py-3 px-4 border-b text-left text-sm text-gray-600 font-semibold">Industry</th>
+                        <th className="py-3 px-4 border-b text-left text-sm text-gray-600 font-semibold">Location</th>
+                        <th className="py-3 px-4 border-b text-left text-sm text-gray-600 font-semibold">Mode</th>
+                        <th className="py-3 px-4 border-b text-left text-sm text-gray-600 font-semibold">Date</th>
+                        <th className="py-3 px-4 border-b text-left text-sm text-gray-600 font-semibold">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {jobs?.jobs?.map((item, index) => (
+                        <tr key={index}>
+                          <td className="py-3 px-4 border-b text-sm text-gray-700">{item.description}</td>
+                          <td className="py-3 px-4 border-b text-sm text-gray-700">{item.description}</td>
+                          <td className="py-3 px-4 border-b text-sm text-gray-700">{item.industry}</td>
+                          <td className="py-3 px-4 border-b text-sm text-gray-700">{item.location}</td>
+                          <td className="py-3 px-4 border-b text-sm text-gray-700">{item.mode}</td>
+                          <td className="py-3 px-4 border-b text-sm text-gray-700">{new Date(item.createdAT).toLocaleDateString()}</td>
+                          <td className="py-3 px-4 border-b text-sm text-gray-700">{item.status}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    itemsPerPage={resultsPerPage}
+                    totalItems={totalResults}
+                    onPageChange={setCurrentPage}
+                  />
+                  
+                </div>
+              </div> */}
+
               <TableContainer >
                 <Table>
                   <TableHeader>
                     <tr>
                       <TableCell>Job Title</TableCell>
                       <TableCell>Details</TableCell>
-                      {/* <TableCell>Industry</TableCell> */}
-                      <TableCell>Location</TableCell>
+                      <TableCell>Industry</TableCell>
+                      <TableCell>Duration</TableCell>
                       <TableCell>Mode</TableCell>
                       <TableCell>Date</TableCell>
                       <TableCell>Status</TableCell>
@@ -154,18 +213,18 @@ const Dashboard = () => {
                         <TableCell>
                           <div className="flex hover:underline decoration-orange-500 items-center text-sm">
                             <Link href={`/sli/jobs/${user.ID}`}>
-                              <p className="font-semibold">{user.description}</p>
+                              <p className="font-semibold">{user.name}</p>
                             </Link>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm"> {user.description}</span>
+                          <span className="text-sm capitalize"> {user.description}</span>
                         </TableCell>
-                        {/* <TableCell>
-                          <Badge type={user.status}>{user.status}</Badge>
-                        </TableCell> */}
                         <TableCell>
-                          <span className="text-sm"> {user.location}</span>
+                        <span className="text-sm capitalize"> {user.industryOfInterpretation}</span>
+                        </TableCell>
+                        <TableCell>
+                          <span className="text-sm"> {user.duration}</span>
                         </TableCell>
                         <TableCell>
                           <span className="text-sm"> {user.mode}</span>
@@ -176,7 +235,7 @@ const Dashboard = () => {
                           </span>
                         </TableCell>
                         <TableCell>
-                          <Badge type={user.status == 'COMPLETED' ? 'success': 'primary'}>{user.status}</Badge>
+                          <Badge type={user.status == 'COMPLETED' ? 'success': user.status == 'AVAILABLE' ? 'success' : 'primary'}>{user.status}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -191,6 +250,7 @@ const Dashboard = () => {
                   />
                 </TableFooter>
               </TableContainer>
+
             </div>
           </div>
         </div>
