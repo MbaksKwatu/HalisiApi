@@ -24,7 +24,7 @@ const Jobdetail = ({params}) => {
     })
 
     const handleBookJob = () => {
-      dispatch(bookJob({id, token}))
+      dispatch(bookJob({ id,token }))
       .unwrap()
       .then((res)=>{
         setshow({open:true, text: 'Job booked succesfully', mood: 'success'})
